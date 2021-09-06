@@ -5,15 +5,15 @@
 ### My Work
 
 [Timely Fitness](/timely_fitness.md)
-<img src="images/timely_fitness_logo.png?raw=true"/>
+<img src="images/timely_fitness_logo.png?raw=true" alt="drawing" width="200"/>
 
 ---
 [Exacto GPS](/pdf/sample_presentation.pdf)
-<img src="images/exacto_gps_logo.png?raw=true"/>
+<img src="images/exacto_gps_logo.png?raw=true" alt="drawing" width="200"/>
 
 ---
 [Shift Calendar](http://example.com/)
-<img src="images/shift_calendar_logo.png?raw=true"/>
+<img src="images/shift_calendar_logo.png?raw=true" alt="drawing" width="200"/>
 
 ---
 [Carmel Clay Public Library Events Web Scraper]()
