@@ -2,34 +2,34 @@
 
 ---
 
-### Category Name 1 
+### My Work
 
-[Project 1 Title](/sample_page)
+[Timely Fitness](/timely_fitness.md)
 <img src="images/dummy_thumbnail.jpg?raw=true"/>
 
 ---
-[Project 2 Title](/pdf/sample_presentation.pdf)
+[Exacto GPS](/pdf/sample_presentation.pdf)
 <img src="images/dummy_thumbnail.jpg?raw=true"/>
 
 ---
-[Project 3 Title](http://example.com/)
+[Shift Calendar](http://example.com/)
 <img src="images/dummy_thumbnail.jpg?raw=true"/>
 
 ---
+[Carmel Clay Public Library Events Web Scraper]()
 
-### Category Name 2
+---
 
-- [Project 1 Title](http://example.com/)
-- [Project 2 Title](http://example.com/)
-- [Project 3 Title](http://example.com/)
-- [Project 4 Title](http://example.com/)
-- [Project 5 Title](http://example.com/)
+### Contribute to my projects
 
+- [Timely Fitness](https://github.com/Argentable/Timely-Fitness#readme)
+- [Exacto GPS](https://github.com/Argentable/Exacto-GPS#readme)
+- [Shift Calendar](https://github.com/Argentable/Shift-Calendar#readme)
+- [Carmel Clay Public Library Events Web Scraper](https://github.com/Anksharskarp/Python-Web-Crawler-Class-Course-Project)
+- 
 ---
 
 
 
 
 ---
-<p style="font-size:11px">Page template forked from <a href="https://github.com/evanca/quick-portfolio">evanca</a></p>
-<!-- Remove above link if you don't want to attibute -->
