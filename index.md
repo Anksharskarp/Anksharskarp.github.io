@@ -4,9 +4,9 @@
 
 I am a freshman at Lexington High School in Lexington, Massachusetts. I have extensive experience with the Java programming language, having built Android mobile applications with the language. In addition, I also have experience in web scraping and data science with Python, in particular with the Pandas, Numpy, and BeautifulSoup code libraries for data aggregation, web scraping, and data analysis.
 
-On top of this, I am also the founder of [Argentable](argentable.github.io), an open-source software organization that develops apps for fitness, entertainment, and productivity.
+On top of this, I am also the founder of [Argentable](https://www.argentable.github.io), an open-source software organization that develops apps for fitness, entertainment, and productivity.
 
-For my local community, I have volunteered for [HelpForStudents](helpforstudents.org), which provides free tutoring services to students for all subjects, including computer science. 
+For my local community, I have volunteered for [HelpForStudents](https://www.helpforstudents.org), which provides free tutoring services to students for all subjects, including computer science. 
 
 In my free time, I mod Minecraft using Forge and FabricMC, play the violin, and run cross country. I also do Public Policy Debate on my high school team. 
 
