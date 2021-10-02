@@ -39,9 +39,3 @@ In my free time, I mod Minecraft using Forge and FabricMC, play the violin, and 
 - [Exacto GPS](https://github.com/Argentable/Exacto-GPS#readme)
 - [Shift Calendar](https://github.com/Argentable/Shift-Calendar#readme)
 - [Carmel Clay Public Library Events Web Scraper](https://github.com/Anksharskarp/Python-Web-Crawler-Class-Course-Project#readme)
----
-
-
-
-
----
