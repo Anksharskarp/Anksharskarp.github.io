@@ -8,7 +8,7 @@ On top of this, I am also the founder of [Argentable](https://www.argentable.git
 
 For my local community, I have volunteered for [HelpForStudents](https://www.helpforstudents.org), which provides free tutoring services to students for all subjects, including computer science. 
 
-In my free time, I mod Minecraft using Forge and FabricMC, play the violin, and run cross country. I also do Public Policy Debate on my high school team. 
+In my free time, I mod Minecraft using Forge and FabricMC, play the violin, and run cross country. I also experiment with Raspberry Pi automation (using Python) and Ubuntu Web Servers.
 
 ---
 
