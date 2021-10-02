@@ -1,4 +1,4 @@
-## William Zhang - Mobile Development, Modding, and Competitive Programming
+## Mobile Development, Modding, and Competitive Programming
 
 ### Introduction
 
