@@ -11,10 +11,14 @@ For my local community, I have volunteered for [HelpForStudents](https://www.hel
 In my free time, I mod Minecraft using Forge and FabricMC, play the violin, and run cross country. I also experiment with Raspberry Pi automation (using Python) and Ubuntu Web Servers.
 
 Interested in reaching out?
+
 🖥️ Find me on Discord: Anksharskarp#5814
+
 📫 Email me: aerialconnection98@gmail.com
-📱 (Instagram)[https://www.instagram.com/williamzhangdev/]
-📱 (Facebook)[https://www.facebook.com/williamzhangdev/]
+
+📱 [Instagram](https://www.instagram.com/williamzhangdev/)
+
+📱 [Facebook](https://www.facebook.com/williamzhangdev/)
 
 
 ---
