@@ -4,7 +4,7 @@
 
 I am a freshman at Lexington High School in Lexington, Massachusetts. I have extensive experience with the Java programming language, having built Android mobile applications with the language. In addition, I also have experience in web scraping and data science with Python, in particular with the Pandas, Numpy, and BeautifulSoup code libraries for data aggregation, web scraping, and data analysis.
 
-On top of this, I am also the founder of [Argentable](https://www.argentable.github.io), an open-source software organization that develops apps for fitness, entertainment, and productivity.
+On top of this, I am also the founder of [Artics Engineering](https://github.com/artics-engineering), a software company that develops innovative new products for the future.
 
 For my local community, I have volunteered for [HelpForStudents](https://www.helpforstudents.org), which provides free tutoring services to students for all subjects, including computer science. 
 
@@ -46,7 +46,7 @@ Interested in reaching out?
 
 ### Contribute to my projects
 
-- [Timely Fitness](https://github.com/Argentable/Timely-Fitness#readme)
-- [Exacto GPS](https://github.com/Argentable/Exacto-GPS#readme)
-- [Shift Calendar](https://github.com/Argentable/Shift-Calendar#readme)
+- [Timely Fitness](https://github.com/Artics-Engineering/Timely-Fitness#readme)
+- [Exacto GPS](https://github.com/Artics-Engineering/Exacto-GPS#readme)
+- [Shift Calendar](https://github.com/Artics-Engineering/Shift-Calendar#readme)
 - [Carmel Clay Public Library Events Web Scraper](https://github.com/Anksharskarp/Python-Web-Crawler-Class-Course-Project#readme)
