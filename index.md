@@ -2,11 +2,12 @@
 
 ### Introduction
 
-I am a freshman at Lexington High School in Lexington, Massachusetts. I have extensive experience with the Java programming language, having built Android mobile applications with the language. In addition, I also have experience in web scraping and data science with Python, in particular with the Pandas, Numpy, and BeautifulSoup code libraries for data aggregation, web scraping, and data analysis.
+I am a sophomore at Lexington High School in Lexington, Massachusetts. I have extensive experience with the Java programming language, having built Android mobile applications with the language. In addition, I also have experience in web scraping and data science with Python, in particular with the Pandas, Numpy, and BeautifulSoup code libraries for data aggregation, web scraping, and data analysis.
 
 On top of this, I am also the founder of [Artics Engineering](https://github.com/artics-engineering), a software company that develops innovative new products for the future.
 
 For my local community, I have volunteered for [HelpForStudents](https://www.helpforstudents.org), which provides free tutoring services to students for all subjects, including computer science. 
+Currently, I am building software projects for the Greater Boston community in the [Lexington Youth STEM Team](http://lexyouthstem.org), which uses computer science technologies to strengthen the bonds of the community.
 
 In my free time, I mod Minecraft using Forge and FabricMC, play the violin, and run cross country. I also experiment with Raspberry Pi automation (using Python) and Ubuntu Web Servers.
 
@@ -14,7 +15,7 @@ Interested in reaching out?
 
 🖥️ Find me on Discord: Anksharskarp#5814
 
-📫 Email me: aerialconnection98@gmail.com
+📫 Email me: [aerialconnection98@gmail.com])(aerialconnection98@gmail.com)
 
 📱 [Instagram](https://www.instagram.com/williamzhangdev/)
 
