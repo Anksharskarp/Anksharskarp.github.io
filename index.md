@@ -15,7 +15,7 @@ Interested in reaching out?
 
 🖥️ Find me on Discord: Anksharskarp#5814
 
-📫 Email me: [aerialconnection98@gmail.com])(aerialconnection98@gmail.com)
+📫 Email me: [anksharskarp@gmail.com])(anksharskarp@gmail.com)
 
 📱 [Instagram](https://www.instagram.com/williamzhangdev/)
 
