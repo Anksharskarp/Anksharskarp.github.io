@@ -2,7 +2,7 @@
 
 ❗
 *Limited availability in July through August 2023 due to the MathILy program at Bryn Mawr College. Regular software engineering availability expected to return in September 2023.*
-<br></br>
+<br>
 *~William*
 
 ### Introduction
