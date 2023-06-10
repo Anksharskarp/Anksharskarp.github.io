@@ -1,7 +1,7 @@
 title: William Zhang
-logo: "/images/logo.png?raw=true" # your photo (or logo) here
-description: > # your text below (remove <br> elements if you don't need line breaks)
-  Forge/FabricMC Modding, Competitive Programming, and Mobile Application Development
+logo: "/images/logo.JPG?raw=true" # Logo image location (resource path).
+description: > # Text/Descriptor Elements (<br> provides line breaks for multi-line descriptors).
+  Mobile App Developer, Competitive Programmer, and Full-Stack Software Engineer
   <br><br>
   <a href="https://www.linkedin.com/in/william-zhang-968248212/">View My LinkedIn Profile</a> 
   
