@@ -15,7 +15,7 @@ Interested in reaching out?
 
 🖥️ Find me on Discord: Anksharskarp#5814
 
-📫 Email me: [anksharskarp@gmail.com])
+📫 [Email me](anksharskarp@gmail.com)
 
 📱 [Instagram](https://www.instagram.com/williamzhangdev/)
 
