@@ -13,9 +13,9 @@ In my free time, I mod Minecraft using Forge and FabricMC, play the violin, and 
 
 Interested in reaching out?
 
-🖥️ Find me on Discord: Anksharskarp#5814
+🖥️ Discord: Anksharskarp#5814
 
-📫 [Email me](anksharskarp@gmail.com)
+📫 [Email](anksharskarp@gmail.com)
 
 📱 [Instagram](https://www.instagram.com/williamzhangdev/)
 
