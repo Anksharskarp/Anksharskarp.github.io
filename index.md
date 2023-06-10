@@ -2,7 +2,9 @@
 
 ### Introduction
 
-❗️Limited availability in July through August 2023 due to the MathILy program at Bryn Mawr College. Regular software engineering availability expected to return in September 2023.
+❗
+Limited availability in July through August 2023 due to the MathILy program at Bryn Mawr College. Regular software engineering availability expected to return in September 2023.
+~William
 
 I am a rising junior at Lexington High School in Lexington, Massachusetts. I have extensive experience with the Java programming language, having built Android mobile applications with the language. In addition, I also have experience in web scraping and data science with Python, in particular with the Pandas, Numpy, and BeautifulSoup code libraries for data aggregation, web scraping, and data analysis.
 
