@@ -1,7 +1,9 @@
 ## Mobile Development, Modding, and Competitive Programming
 
 ❗
-*Limited availability in July through August 2023 due to the MathILy program at Bryn Mawr College. Regular software engineering availability expected to return in September 2023.*
+*No availability in July through August 2023 due to the MathILy program at Bryn Mawr College. Regular software engineering availability expected to return in September 2023.*
+<br>
+*If you have a question about upcoming software releases, check starting the week of August 20th on the App Store and Google Play through Artics.*
 <br>
 *~William*
 
