@@ -1,14 +1,8 @@
 ## Mobile Development, Modding, and Competitive Programming
 
-❗
-<br>
-*If you have a question about upcoming software releases, check starting the week of August 20th on the App Store and Google Play through Artics. Students interested in joining SSP can find out more at [https://summerscience.org/](https://summerscience.org/)*
-<br>
-*~William*
-
 ### Introduction
 
-I am a rising junior at Lexington High School in Lexington, Massachusetts. I have extensive experience with the Java programming language, having built Android mobile applications with the language. In addition, I also have experience in web scraping and data science with Python, in particular with the Pandas, Numpy, and BeautifulSoup code libraries for data aggregation, web scraping, and data analysis.
+I am a junior at Lexington High School in Lexington, Massachusetts. I have extensive experience with the Java programming language, having built Android mobile applications with the language. In addition, I also have experience in web scraping and data science with Python, in particular with the Pandas, Numpy, and BeautifulSoup code libraries for data aggregation, web scraping, and data analysis.
 
 On top of this, I am also the founder of [Artics Engineering](https://github.com/artics-engineering), a software company that develops innovative new products for the future.
 
@@ -16,17 +10,6 @@ For my local community, I have volunteered for [HelpForStudents](https://www.hel
 Currently, I am building software projects for the Greater Boston community in the [Lexington Youth STEM Team](http://lexyouthstem.org), which uses computer science technologies to strengthen the bonds of the community.
 
 In my free time, I mod Minecraft using Forge and FabricMC, play the violin, and run cross country and track. I also experiment with Raspberry Pi automation and Ubuntu Web Servers. Recently, I've built platform-agnostic web services with React Native and ReactJS.
-
-Interested in reaching out?
-
-🖥️ Discord: Anksharskarp#5814
-
-📫 [Email](anksharskarp@gmail.com)
-
-📱 [Instagram](https://www.instagram.com/williamzhangdev/)
-
-📱 [Facebook](https://www.facebook.com/williamzhangdev/)
-
 
 ---
 
