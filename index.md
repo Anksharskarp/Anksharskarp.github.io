@@ -2,7 +2,7 @@
 
 ### Introduction
 
-I am a student developer currently in high school. I have extensive experience with the Java programming language, having built Android mobile applications with the language. In addition, I also have experience in web scraping and data science with Python, in particular with the Pandas, Numpy, and BeautifulSoup code libraries for data aggregation, web scraping, and data analysis.
+I am a student developer and a senior at Lexington High School in Massachusetts, USA. I have extensive experience with the Java programming language, having built Android mobile applications with the language. In addition, I also have experience in web scraping and data science with Python, in particular with the Pandas, Numpy, and BeautifulSoup code libraries for data aggregation, web scraping, and data analysis.
 
 On top of this, I am also the founder of [Artics Engineering](https://github.com/artics-engineering), a software company that develops innovative new products for the future.
 
