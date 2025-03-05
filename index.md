@@ -6,7 +6,7 @@ I am a student developer with extensive experience in Android and iOS app develo
 
 A few years ago, I founded [Artics Engineering](https://github.com/ArticsData), a software organization that develops innovative new products for the future.
 
-For my local community, I have volunteered for [HelpForStudents](https://www.helpforstudents.org), which provides free tutoring services to students for all subjects, including computer science. 
+For my local community, I have volunteered for HelpForStudents, which provides free tutoring services to students for all subjects, including computer science. 
 
 Currently, I am building software projects for the Greater Boston community in the [Lexington Youth STEAM Team](http://youthsteaminitiative.org), which uses computer science technologies to strengthen the bonds of the community.
 
