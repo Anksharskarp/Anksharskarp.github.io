@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>William Zhang | Portfolio Terminal</title>
+    <meta name="description" content="William Zhang - Purdue Computer Science and Mathematics student focused on mobile, embedded systems, and full-stack software.">
+    <link rel="stylesheet" href="assets/css/site.css">
+  </head>
+  <body>
+    <section class="boot-screen" id="bootScreen" aria-live="polite">
+      <div class="boot-window">
+        <div class="boot-topbar">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+          <p>william@zhang ~ /boot</p>
+        </div>
+        <div class="boot-body" id="bootBody"></div>
+        <p class="boot-hint hidden" id="bootHint">Press Enter or click to open.</p>
+      </div>
+    </section>
+
+    <main class="desktop hidden" id="desktop">
+      <section class="terminal-window" id="mainWindow" aria-label="Main portfolio terminal">
+        <header class="window-topbar">
+          <div class="controls">
+            <button class="control red" id="closeWindow" type="button" aria-label="Close window"></button>
+            <button class="control yellow" id="minimizeWindow" type="button" aria-label="Minimize window"></button>
+            <button class="control green" id="maximizeWindow" type="button" aria-label="Toggle focus mode"></button>
+          </div>
+          <p class="window-path">william@zhang ~ /portfolio</p>
+          <div class="topbar-spacer" aria-hidden="true"></div>
+        </header>
+
+        <div class="window-hero">
+          <h1>WILLIAM ZHANG</h1>
+          <p>Purdue CS + Math | Mobile, embedded, and full-stack engineering.</p>
+        </div>
+
+        <div class="window-content" id="windowContent">
+          <section class="content-main">
+            <h2><span>$</span> <span id="activeTitle">overview</span></h2>
+
+            <article class="terminal-section active" data-section="overview" data-title="overview">
+              <p class="lead">I build mobile and systems software and usually own projects end-to-end, from implementation to iteration.</p>
+              <dl class="facts-grid">
+                <dt>School</dt>
+                <dd>Purdue University, Computer Science and Mathematics (Aug 2025 - May 2029)</dd>
+                <dt>GPA</dt>
+                <dd>4.00</dd>
+                <dt>Current Roles</dt>
+                <dd>App Developer (Embedded Systems at Purdue), Project Lead (Purdue Stack), Analyst (Boiler Quant)</dd>
+                <dt>Organization</dt>
+                <dd><span class="inline-brand"><img src="images/artics-logo.png" alt="Artics Engineering logo">Founder, Artics Engineering</span></dd>
+                <dt>Recognition</dt>
+                <dd>USA Computing Olympiad - Gold Division</dd>
+              </dl>
+            </article>
+
+            <article class="terminal-section" data-section="timeline" data-title="timeline">
+              <div class="entry">
+                <h3>May 2024 - Jul 2025</h3>
+                <p class="entry-sub">Research Intern, UPenn Perelman School of Medicine</p>
+                <p>Built NEISS injury data pipelines and evaluated fracture-risk models in Professor Chamith Rajapakse's lab.</p>
+              </div>
+              <div class="entry">
+                <h3>Dec 2024 - Present</h3>
+                <p class="entry-sub">Instructor, KTBYTE Computer Science Academy</p>
+                <p>Teach Java and write weekly data structures and algorithms problem sets.</p>
+              </div>
+              <div class="entry">
+                <h3>Sep 2025 - Present</h3>
+                <p class="entry-sub">App Developer, Embedded Systems at Purdue</p>
+                <p>Build health-tracking features and BLE sync between a mobile app and a custom ESP32 smartwatch.</p>
+              </div>
+              <div class="entry">
+                <h3>Sep 2025 - Jan 2026</h3>
+                <p class="entry-sub">Full Stack Developer, Purdue Stack</p>
+                <p>Replaced a Jupyter-heavy workflow with a standalone system and added waveform visualization tools.</p>
+              </div>
+              <div class="entry">
+                <h3>Jan 2026 - Present</h3>
+                <p class="entry-sub">Project Lead, Purdue Stack | Analyst, Boiler Quant</p>
+                <p>Lead mobile direction at Purdue Stack and contribute C/C++ analytics tooling at Boiler Quant.</p>
+              </div>
+            </article>
+
+            <article class="terminal-section" data-section="experience" data-title="activities">
+              <div class="entry">
+                <h3>App Developer - Embedded Systems at Purdue</h3>
+                <p class="entry-sub">Sep 2025 - Present</p>
+                <p>Built the mobile side of Open Smartwatch: activity logs, sync flows, and BLE reliability improvements.</p>
+              </div>
+              <div class="entry">
+                <h3>Instructor - KTBYTE Computer Science Academy</h3>
+                <p class="entry-sub">Dec 2024 - Present</p>
+                <p>Teach Java classes, run office hours, and write homework sets for DS&A students.</p>
+              </div>
+              <div class="entry">
+                <h3>Research Internship - UPenn Perelman School of Medicine</h3>
+                <p class="entry-sub">May 2024 - Jul 2025</p>
+                <p>Worked in Professor Chamith Rajapakse's lab on injury data cleaning and fracture-risk model experiments.</p>
+              </div>
+              <div class="entry">
+                <h3>Purdue Stack - Full Stack Developer then Project Lead</h3>
+                <p class="entry-sub">Sep 2025 - Present</p>
+                <p>Started as a full stack developer, then moved into project lead. Shipped onboarding, peer matching, and scheduling flows.</p>
+              </div>
+            </article>
+
+            <article class="terminal-section" data-section="education" data-title="education">
+              <div class="entry">
+                <h3>Purdue University</h3>
+                <p class="entry-sub">Computer Science, Mathematics | Aug 2025 - May 2029</p>
+                <p>GPA 4.00. Activities include b01lers Purdue Cybersecurity, Competitive Programmers Union, Purdue Club XCTF, Boiler Blockchain, Purdue Hackers, and ML@Purdue.</p>
+              </div>
+              <div class="entry">
+                <h3>Lexington High School</h3>
+                <p class="entry-sub">High School Diploma</p>
+                <p>Activities: Lex Music Connection, Science Olympiad, Orchestra, Track and Cross-Country, and LHS Math Team.</p>
+              </div>
+            </article>
+
+            <article class="terminal-section" data-section="projects" data-title="projects">
+              <p class="lead">Featured projects are pinned first. The rest load from GitHub.</p>
+              <div class="projects-grid" id="projectsList" aria-live="polite"></div>
+            </article>
+
+            <article class="terminal-section" data-section="skills" data-title="skills">
+              <div class="skills-groups">
+                <section class="skills-group">
+                  <h3 class="skills-group-title">Languages</h3>
+                  <div class="pill-list">
+                    <span>Java</span>
+                    <span>C</span>
+                    <span>C++</span>
+                    <span>Python</span>
+                    <span>R</span>
+                    <span>SQL</span>
+                    <span>JavaScript</span>
+                  </div>
+                </section>
+
+                <section class="skills-group">
+                  <h3 class="skills-group-title">Mobile + Embedded</h3>
+                  <div class="pill-list">
+                    <span>React Native</span>
+                    <span>Android SDK</span>
+                    <span>Bluetooth Low Energy</span>
+                    <span>ESP32</span>
+                    <span>Embedded Systems</span>
+                    <span>KiCad</span>
+                  </div>
+                </section>
+
+                <section class="skills-group">
+                  <h3 class="skills-group-title">Web + Tooling</h3>
+                  <div class="pill-list">
+                    <span>React.js</span>
+                    <span>Electron</span>
+                    <span>REST APIs</span>
+                    <span>Git/GitHub</span>
+                    <span>Linux</span>
+                    <span>Web Scraping</span>
+                  </div>
+                </section>
+
+                <section class="skills-group">
+                  <h3 class="skills-group-title">Core CS + Data</h3>
+                  <div class="pill-list">
+                    <span>Data Structures</span>
+                    <span>Algorithms</span>
+                    <span>Object-Oriented Design</span>
+                    <span>Data Pipelines</span>
+                    <span>Pandas/NumPy</span>
+                    <span>Statistical Modeling</span>
+                    <span>Curriculum Development</span>
+                    <span>Technical Mentoring</span>
+                  </div>
+                </section>
+              </div>
+            </article>
+
+            <article class="terminal-section" data-section="courses" data-title="courses">
+              <ul class="stack-list compact">
+                <li><strong>CS 31100</strong> - Competitive Programming II</li>
+                <li><strong>MA 35100</strong> - Elementary Linear Algebra</li>
+                <li><strong>MA 34100</strong> - Foundations of Analysis</li>
+                <li><strong>CS 18200</strong> - Foundations of Computer Science</li>
+                <li><strong>STAT 35000</strong> - Introduction to Statistics</li>
+                <li><strong>STAT 41600</strong> - Probability</li>
+                <li><strong>CS 18000</strong> - Problem Solving and Object-Oriented Programming</li>
+                <li><strong>CS 24000</strong> - Programming in C</li>
+              </ul>
+            </article>
+
+            <article class="terminal-section" data-section="awards" data-title="awards">
+              <div class="entry">
+                <h3>USA Computing Olympiad</h3>
+                <p class="entry-sub">Gold Division</p>
+                <p>Reached Gold division through USACO contest performance.</p>
+              </div>
+            </article>
+
+            <article class="terminal-section" data-section="contact" data-title="contact">
+              <dl class="facts-grid">
+                <dt>LinkedIn</dt>
+                <dd><a href="https://www.linkedin.com/in/william-zhang-968248212/" target="_blank" rel="noopener">linkedin.com/in/william-zhang-968248212</a></dd>
+                <dt>GitHub</dt>
+                <dd><a href="https://github.com/Anksharskarp" target="_blank" rel="noopener">github.com/Anksharskarp</a></dd>
+                <dt>Email</dt>
+                <dd><a href="mailto:anksharskarp@outlook.com">anksharskarp@outlook.com</a></dd>
+                <dt>Open To</dt>
+                <dd>Software engineering internships and project-based collaboration.</dd>
+              </dl>
+            </article>
+          </section>
+
+          <aside class="content-side">
+            <div class="side-block">
+              <h3>Capabilities</h3>
+              <div class="capability-grid">
+                <span>Build</span><span>Mobile apps, full-stack systems, and embedded integrations.</span>
+                <span>Lead</span><span>End-to-end feature ownership and mentoring.</span>
+                <span>Research</span><span>Data workflows and model experiments.</span>
+                <span>Compete</span><span>USACO Gold and regular contest programming.</span>
+              </div>
+            </div>
+
+            <div class="side-block">
+              <h3>Commands</h3>
+              <div class="command-grid" id="commandGrid">
+                <button data-command="/about" type="button">/about</button>
+                <button data-command="/timeline" type="button">/timeline</button>
+                <button data-command="/activities" type="button">/activities</button>
+                <button data-command="/education" type="button">/education</button>
+                <button data-command="/projects" type="button">/projects</button>
+                <button data-command="/skills" type="button">/skills</button>
+                <button data-command="/courses" type="button">/courses</button>
+                <button data-command="/awards" type="button">/awards</button>
+                <button data-command="/contact" type="button">/contact</button>
+                <button data-command="/help" type="button">/help</button>
+                <button data-command="/close" type="button">/close</button>
+              </div>
+            </div>
+
+            <div class="side-block">
+              <h3>At A Glance</h3>
+              <ol class="mini-timeline">
+                <li><span>2024</span> Research internship at UPenn Perelman.</li>
+                <li><span>2024</span> Started teaching Java at KTBYTE.</li>
+                <li><span>2025</span> Started CS + Math at Purdue.</li>
+                <li><span>2025</span> Joined Embedded Systems at Purdue as an app developer.</li>
+                <li><span>2026</span> Became Purdue Stack project lead and joined Boiler Quant.</li>
+              </ol>
+            </div>
+          </aside>
+        </div>
+
+        <form class="command-line" id="commandForm">
+          <span class="prompt">&gt;</span>
+          <input id="commandInput" type="text" autocomplete="off" spellcheck="false" placeholder="type /help for commands" aria-label="Command input">
+        </form>
+        <p class="command-feedback" id="commandFeedback" aria-live="polite">ready.</p>
+      </section>
+    </main>
+
+    <section class="project-modal hidden" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle">
+      <div class="project-modal-card" role="document">
+        <header class="project-modal-header">
+          <p id="projectModalPath">project://preview</p>
+          <button id="projectModalClose" type="button" aria-label="Close project preview">Close</button>
+        </header>
+        <div class="project-modal-body">
+          <img id="projectModalImage" class="project-modal-image hidden" src="" alt="Project preview">
+          <h3 id="projectModalTitle"></h3>
+          <p id="projectModalDescription"></p>
+          <dl class="project-meta">
+            <dt>Language</dt>
+            <dd id="projectModalLanguage"></dd>
+            <dt>Stack</dt>
+            <dd id="projectModalStack"></dd>
+            <dt>Updated</dt>
+            <dd id="projectModalUpdated"></dd>
+            <dt>Stars</dt>
+            <dd id="projectModalStars"></dd>
+          </dl>
+          <div class="project-modal-actions">
+            <a id="projectModalRepo" href="#" target="_blank" rel="noopener">Open Repository</a>
+            <a id="projectModalHome" href="#" target="_blank" rel="noopener" class="hidden">Open Demo</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="exit-screen hidden" id="exitScreen" aria-label="Closed terminal view">
+      <div class="exit-window">
+        <header class="window-topbar">
+          <div class="controls">
+            <span class="control red"></span>
+            <span class="control yellow"></span>
+            <span class="control green"></span>
+          </div>
+          <p class="window-path">william@zhang ~ /exit</p>
+          <div class="topbar-spacer" aria-hidden="true"></div>
+        </header>
+
+        <div class="exit-content">
+          <p class="danger">$ kill -9 portfolio</p>
+          <p class="danger">x Process terminated.</p>
+          <p class="muted">Session ended. Reach out any time.</p>
+          <p class="exit-title">Let's talk.</p>
+
+          <div class="exit-actions">
+            <a href="https://www.linkedin.com/in/william-zhang-968248212/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://github.com/Anksharskarp" target="_blank" rel="noopener">GitHub</a>
+            <button id="reopenWindow" type="button">Reopen terminal</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="assets/js/site.js" defer></script>
+  </body>
+</html>
