@@ -1,0 +1,255 @@
+/* The introduction is optional: without JavaScript, the page is visible. */
+html[data-booting] {
+  overflow: hidden;
+}
+html[data-booting] body > :not(.boot-screen) {
+  visibility: hidden;
+}
+.boot-screen:not([open]) {
+  display: none;
+}
+.boot-screen {
+  width: min(520px, calc(100% - 40px));
+  max-height: calc(100dvh - 40px);
+  overflow: auto;
+  padding: 0;
+  border: 1px solid var(--edge);
+  border-radius: 0;
+  background: var(--panel);
+  color: var(--ink);
+  box-shadow: 8px 8px 0 var(--shadow);
+  font-family: var(--mono);
+}
+.boot-screen::backdrop {
+  background-color: var(--page);
+  background-image:
+    linear-gradient(#89917f15 1px, transparent 1px),
+    linear-gradient(90deg, #89917f15 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.boot-titlebar {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--line);
+  background: var(--terminal);
+  color: var(--muted);
+  font-size: 11px;
+}
+.boot-titlebar > span:last-child {
+  color: var(--accent);
+  letter-spacing: 5px;
+}
+.boot-content {
+  padding: 32px;
+}
+.boot-content h2 {
+  font-size: 22px;
+  letter-spacing: -1px;
+  margin: 24px 0;
+}
+.boot-voxels {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  height: 42px;
+  padding-left: 7px;
+}
+.boot-voxels i {
+  position: relative;
+  display: block;
+  width: 22px;
+  height: 25px;
+  background: #a5b197;
+  transform: skewY(30deg);
+  animation: voxel-arrive 480ms steps(4, end) both;
+}
+.boot-voxels i::before {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 13px;
+  top: -13px;
+  left: 0;
+  background: #d4dccb;
+  transform: skewX(-60deg);
+  transform-origin: bottom;
+}
+.boot-voxels i::after {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 25px;
+  right: -22px;
+  top: 0;
+  background: #7b8b70;
+  transform: skewY(-60deg);
+  transform-origin: left;
+}
+.boot-voxels i:nth-child(2) {
+  animation-delay: 140ms;
+  z-index: 1;
+}
+.boot-voxels i:nth-child(3) {
+  animation-delay: 280ms;
+  z-index: 2;
+}
+.boot-output {
+  font-size: 12px;
+  line-height: 1.9;
+  min-height: 122px;
+}
+.boot-output p + p {
+  margin-top: 4px;
+}
+.boot-command {
+  color: var(--accent);
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  animation: boot-type 450ms steps(22, end) 120ms forwards;
+}
+.boot-cursor {
+  animation: boot-cursor 900ms steps(1, end) infinite;
+}
+.boot-log {
+  animation: boot-line 1ms step-end both;
+  color: var(--muted);
+}
+.boot-log span {
+  color: var(--accent);
+  margin-right: 10px;
+}
+.boot-log.first {
+  animation-delay: 600ms;
+}
+.boot-log.second {
+  animation-delay: 900ms;
+}
+.boot-log.third {
+  animation-delay: 1300ms;
+}
+.boot-progress {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 5px;
+  border: 1px solid var(--line);
+  padding: 6px;
+  margin: 20px 0 24px;
+}
+.boot-progress i {
+  height: 10px;
+  background: var(--line);
+  animation: boot-fill 1ms step-end both;
+}
+.boot-progress i:nth-child(1) {
+  animation-delay: 150ms;
+}
+.boot-progress i:nth-child(2) {
+  animation-delay: 250ms;
+}
+.boot-progress i:nth-child(3) {
+  animation-delay: 350ms;
+}
+.boot-progress i:nth-child(4) {
+  animation-delay: 450ms;
+}
+.boot-progress i:nth-child(5) {
+  animation-delay: 550ms;
+}
+.boot-progress i:nth-child(6) {
+  animation-delay: 650ms;
+}
+.boot-progress i:nth-child(7) {
+  animation-delay: 750ms;
+}
+.boot-progress i:nth-child(8) {
+  animation-delay: 850ms;
+}
+.boot-progress i:nth-child(9) {
+  animation-delay: 950ms;
+}
+.boot-progress i:nth-child(10) {
+  animation-delay: 1050ms;
+}
+.boot-progress i:nth-child(11) {
+  animation-delay: 1150ms;
+}
+.boot-progress i:nth-child(12) {
+  animation-delay: 1250ms;
+}
+.boot-skip {
+  font-size: 11px;
+  width: 100%;
+  justify-content: space-between;
+}
+.boot-skip kbd {
+  font: inherit;
+  color: var(--muted);
+}
+@keyframes voxel-arrive {
+  from {
+    opacity: 0;
+    translate: 0 -18px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@keyframes boot-type {
+  to {
+    width: 23ch;
+  }
+}
+@keyframes boot-cursor {
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes boot-line {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes boot-fill {
+  from {
+    background: var(--line);
+  }
+  to {
+    background: var(--accent);
+  }
+}
+@media (max-width: 480px) {
+  .boot-content {
+    padding: 26px 22px;
+  }
+  .boot-content h2 {
+    font-size: 19px;
+  }
+  .boot-output {
+    font-size: 11px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .boot-screen *,
+  .boot-screen *::before,
+  .boot-screen *::after {
+    animation: none !important;
+  }
+  [data-replay-boot] {
+    display: none;
+  }
+}
+@media print {
+  .boot-screen,
+  [data-replay-boot] {
+    display: none !important;
+  }
+  html[data-booting] body > :not(.boot-screen) {
+    visibility: visible;
+  }
+}

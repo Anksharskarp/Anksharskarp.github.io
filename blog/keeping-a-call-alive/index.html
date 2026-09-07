@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4f4f1" />
+    <title>Video Calls and Session Expiry — William Zhang</title>
+    <meta
+      name="description"
+      content="How The Peer Network’s React Native app coordinates an Amazon Chime video call with API session expiry, native events, and exactly-once navigation. A summer 2026 engineering deep dive."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="Managing video calls and session expiry in React Native"
+    />
+    <meta
+      property="og:description"
+      content="Native video, authentication, and navigation in The Peer Network’s React Native app. An engineering note by William Zhang."
+    />
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../assets/css/site.css" />
+    <link rel="stylesheet" href="../../assets/css/boot.css" />
+    <script src="../../assets/js/boot.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="wordmark" href="../../" aria-label="William Zhang, home"
+          >wz<span aria-hidden="true">_</span></a
+        >
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="../../#work">Work</a
+          ><a href="../../#experience">Experience</a
+          ><a href="../../#about">About</a
+          ><a href="../" aria-current="page">Blog</a>
+        </nav>
+        <a
+          class="resume-link"
+          href="../../assets/documents/william-zhang-resume-august-2026.pdf"
+          >Résumé <span aria-hidden="true">↗</span></a
+        >
+      </div>
+    </header>
+    <main id="main" class="page-width">
+      <header class="article-header">
+        <a class="back-link" href="../">← All articles</a>
+        <p class="eyebrow">001 / The Peer Network · Summer 2026</p>
+        <h1>Managing video calls and session expiry in React Native</h1>
+        <p class="article-deck">
+          How I worked with native video events, API session timers, and
+          navigation in The Peer Network’s mobile app during summer 2026.
+        </p>
+        <div class="article-meta">
+          <span>William Zhang</span
+          ><time datetime="2026-09-07">September 7, 2026</time
+          ><span>10 min read</span>
+        </div>
+      </header>
+      <div class="article-layout">
+        <aside class="article-toc">
+          <nav aria-label="On this page">
+            <h2>In this article</h2>
+            <ol>
+              <li><a href="#two-lifecycles">01 · Two lifecycles</a></li>
+              <li><a href="#native-boundary">02 · The native boundary</a></li>
+              <li><a href="#three-clocks">03 · Session timers</a></li>
+              <li><a href="#one-exit">04 · Call exits</a></li>
+              <li><a href="#late-responses">05 · Late responses</a></li>
+              <li><a href="#verification">06 · What to verify</a></li>
+              <li><a href="#references">References</a></li>
+            </ol>
+          </nav>
+        </aside>
+        <article class="article-body" aria-label="Article content">
+          <p>
+            During my summer 2026 internship at The Peer Network, I worked on
+            the React Native app that lets people book sessions with peer
+            counselors and meet over video. The interface looks straightforward:
+            choose a time, join, talk, leave. Underneath, the application has to
+            coordinate JavaScript, native media SDKs, a REST backend, and two
+            mobile operating systems.
+          </p>
+          <p>
+            This article focuses on the call lifecycle in that app. An
+            authentication timer should not interrupt a conversation by
+            navigating to sign-in. The app still needs to enforce API session
+            expiry.
+          </p>
+
+          <h2 id="two-lifecycles">01 / Separate call and API lifecycles</h2>
+          <p>
+            The application has two independent network paths. Its REST API
+            handles identity, profiles, and bookings. Amazon Chime handles the
+            actual audio and video through a local native module. Once the
+            meeting is connected, media traffic does not go through the
+            application’s API client.
+          </p>
+          <figure>
+            <div class="lifecycle-diagram">
+              <div>
+                <strong>React Native</strong
+                ><small>Call UI &amp; coordination</small>
+              </div>
+              <span class="diagram-arrow" aria-hidden="true">→</span>
+              <div>
+                <strong>Native bridge</strong
+                ><small>Controls down, events up</small>
+              </div>
+              <span class="diagram-arrow" aria-hidden="true">→</span>
+              <div>
+                <strong>Chime SDK</strong><small>Audio &amp; video</small>
+              </div>
+            </div>
+            <figcaption>
+              The media path is separate from the REST requests that maintain
+              the application session.
+            </figcaption>
+          </figure>
+          <p>
+            These separate connections can cause an inactivity mismatch. A
+            person can spend an hour actively talking while making no
+            authenticated API requests. To the media layer, they are connected.
+            To an API that measures inactivity from its last request, they can
+            appear idle.
+          </p>
+          <p>
+            The design therefore keeps three responsibilities distinct: the
+            meeting reports whether it is live, the token manager tracks session
+            timing, and a central session guard decides when a forced sign-out
+            can take effect. No individual screen needs to invent its own
+            response to an expired token.
+          </p>
+
+          <h2 id="native-boundary">02 / The native video bridge</h2>
+          <p>
+            The app uses Expo, with a local module wrapping Amazon Chime on iOS
+            and Android. JavaScript accesses it through a typed bridge with
+            operations such as <code>startMeeting</code>,
+            <code>stopMeeting</code>, <code>setMute</code>, and
+            <code>setCameraOn</code>. Meeting and attendee events travel back in
+            the other direction. Native video views render the streams inside
+            frames laid out by React Native.
+          </p>
+          <p>
+            Keeping this interface small makes the ownership clear. React Native
+            owns the screen and layout; the native SDK owns media. The wrapper
+            also exposes whether the native bridge is available. If it is
+            absent, the meeting screen shows an unavailable state instead of
+            presenting controls for a call it cannot start. Expo Go cannot load
+            this custom native module; a development build is needed for working
+            video.
+            <a href="https://docs.expo.dev/workflow/customizing/"
+              >Expo documents this native-code boundary</a
+            >.
+          </p>
+          <p>
+            The same separation applies to event timing. Mounting the meeting
+            screen does not mean a call is live. Joining may fail, permissions
+            may be missing, or the SDK may never connect. The session guard
+            becomes call-active on <code>OnMeetingStart</code> and becomes
+            inactive on <code>OnMeetingEnd</code> or <code>OnError</code>. An
+            indefinitely mounted “Joining…” screen therefore cannot suspend
+            inactivity handling forever.
+          </p>
+          <p>
+            A video tile can exist before it has valid dimensions. The SDK can
+            announce a tile before its first frame, with dimensions of zero. The
+            self-view follows subsequent size-change events so that the first
+            frame and later device rotations can update its aspect ratio.
+            Explicit aspect-fit rendering on both platforms prevents a mismatch
+            between the incoming stream and the available frame from stretching
+            or cropping the picture.
+          </p>
+
+          <h2 id="three-clocks">03 / Session timers</h2>
+          <p>
+            In the documented backend contract for this app, tokens have a
+            15-minute idle window and an eight-hour absolute lifetime. Those are
+            separate limits. A keepalive can maintain activity; it cannot move
+            the absolute deadline. The client also needs its own view of user
+            activity, because scrolling cached content might never produce a
+            request.
+          </p>
+          <div
+            class="table-scroll"
+            role="region"
+            aria-label="Session timer responsibilities"
+            tabindex="0"
+          >
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Mechanism</th>
+                  <th scope="col">When it runs</th>
+                  <th scope="col">What it means</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>API keepalive</td>
+                  <td>Every 5 minutes; also at call start and foreground</td>
+                  <td>
+                    Maintain the server’s idle window while the user is active.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Client inactivity timer</td>
+                  <td>15 minutes since user activity</td>
+                  <td>
+                    Sign out an inactive user; suspend while a call is live.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Absolute-expiry watchdog</td>
+                  <td>At the server-stated expiry</td>
+                  <td>
+                    The API session has reached its cap. Defer the UI sign-out
+                    during a live call.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            The client tracks keepalives separately from user activity. If it
+            reset the client inactivity timer, the application would keep itself
+            signed in merely by running. Instead, pings are gated on recent user
+            activity or a live call. When a call ends, the inactivity window
+            starts again from that point: a quiet participant has still been
+            using the app.
+          </p>
+          <p>
+            Token rotation is another operation with a different purpose. In
+            this backend, refresh rotates the bearer token but carries its
+            original expiry forward. It cannot extend the session. Repeatedly
+            refreshing near expiry would add requests and revoke tokens that
+            other requests might still be using, without extending the session.
+          </p>
+          <div class="article-note">
+            <p>
+              <strong
+                >Deferring sign-out does not renew an expired token.</strong
+              >
+              The API can reject that token while the existing Chime media
+              session continues. The guard delays the navigation and teardown
+              until the call ends; it does not override server authorization.
+            </p>
+          </div>
+          <p>
+            Foreground transitions matter too. A mobile operating system can
+            freeze JavaScript timers in the background. On return, the manager
+            checks the deadline against wall time and sends a keepalive
+            immediately when appropriate. A timer callback alone is not proof
+            that a deadline has been enforced.
+          </p>
+          <p>
+            There is also a recovery case: a successful authenticated keepalive
+            during a call cancels a previously deferred sign-out. That
+            successful response is stronger evidence of the current API session
+            than the earlier failure that queued the sign-out.
+          </p>
+
+          <h2 id="one-exit">04 / Handling call exits</h2>
+          <p>
+            Several events can end a call. The user can press End, use Android’s
+            back button, receive a remote meeting-end event, or encounter an SDK
+            error. Two of those events can arrive almost together. Without a
+            shared guard, the app can stop the meeting twice or navigate twice.
+          </p>
+          <p>
+            The meeting screen funnels exits through one guarded operation. The
+            once-only guard is set before teardown, because teardown itself may
+            produce another end event. The following is illustrative pseudocode
+            for that ordering, rather than a copy of the production
+            implementation:
+          </p>
+          <pre
+            tabindex="0"
+            role="region"
+            aria-label="Scrollable illustrative code"
+          ><code>function leaveMeeting(reason) {
+  if (exitStarted) return;
+  exitStarted = true;
+
+  // Preserve a failure if a later end event follows it.
+  const finalReason = failed ? "failed" : reason;
+
+  stopMediaAndRemoveListeners();
+  handOffOrReturn(finalReason);
+}</code></pre>
+          <p>
+            The destination is a typed, serializable navigation target supplied
+            by the caller. That keeps the video screen from deciding product
+            policy about what should happen after a session. When a post-session
+            destination is supplied, it replaces the meeting route. Pressing
+            Back from that destination should not reopen a finished call. This
+            uses the stack replacement behavior described in the
+            <a href="https://reactnavigation.org/docs/stack-actions/#replace"
+              >React Navigation reference</a
+            >.
+          </p>
+          <p>
+            The leave reason travels with the handoff. A voluntary departure is
+            <code>left</code>; a normal remote end is <code>ended</code>. A
+            failure stays <code>failed</code> even if the SDK subsequently emits
+            a normal end event. If an end arrives while the app is backgrounded,
+            it is classified as <code>interrupted</code>. That gives the next
+            screen enough context to avoid declaring success after a call that
+            never connected.
+          </p>
+          <p>
+            Some exits deliberately behave differently. An error remains visible
+            until the user chooses to leave, so navigation does not erase the
+            explanation. The iOS edge-swipe is disabled on the meeting route so
+            it cannot bypass controlled teardown. If a post-session handoff is
+            rejected, the app falls back to returning to the previous screen.
+            Leaving must remain possible even when the destination fails.
+          </p>
+          <p>
+            Backgrounding alone is not an end event. The documented Android
+            implementation is foreground-only and does not run a foreground
+            service. Local capture can stop when the app is backgrounded;
+            returning does not explicitly restart the camera or unmute. Whether
+            capture recovers depends on the SDK. This architecture does not
+            promise uninterrupted background calls.
+          </p>
+
+          <h2 id="late-responses">05 / Handling stale responses</h2>
+          <p>
+            There is one more race outside the video screen. A keepalive starts
+            for user A. Before it returns, A signs out and user B signs in. By
+            the time A’s response arrives, the token manager is running again.
+            Checking a boolean such as <code>running</code> would accept a
+            response from the wrong session.
+          </p>
+          <p>
+            The manager therefore carries a run epoch: a counter that changes on
+            each start and stop. An asynchronous operation captures that epoch
+            and checks it again after awaiting a response. It also captures the
+            token it made the request with. An expiry update is allowed only if
+            the stored session still belongs to that token.
+          </p>
+          <pre
+            tabindex="0"
+            role="region"
+            aria-label="Scrollable illustrative code"
+          ><code>// Illustrative: associate async work with its session.
+const epochAtStart = runEpoch;
+const tokenAtStart = currentToken;
+const status = await readStatus(tokenAtStart);
+
+if (epochAtStart !== runEpoch) return;
+await updateStoredExpiry(status.expiresAt, {
+  forToken: tokenAtStart
+});</code></pre>
+          <p>
+            The token comparison belongs inside the serialized storage write,
+            atomically with that write. Checking before enqueueing it leaves
+            another window in which sign-out can clear storage. A late write
+            could otherwise restore a session after the interface has already
+            returned to sign-in.
+          </p>
+          <p>
+            This is the broader pattern: an asynchronous result must establish
+            both that it succeeded and that it still belongs to the state it
+            intends to change. The same reasoning applies to a profile request
+            that resolves after sign-out and must not put the app back into the
+            authenticated navigation tree.
+          </p>
+
+          <h2 id="verification">06 / Verification</h2>
+          <p>
+            The useful checks target transitions between subsystems. These are
+            the cases I would use to evaluate this design; they are a
+            verification checklist, not a claim that every scenario below was
+            measured on every device:
+          </p>
+          <ul>
+            <li>
+              <strong>Joining never connects.</strong> The mounted screen must
+              not keep the session marked call-active.
+            </li>
+            <li>
+              <strong>The API session expires mid-call.</strong> API
+              authorization still fails; the existing media call is not
+              interrupted by a navigation bounce. Deferred sign-out takes effect
+              when the call ends.
+            </li>
+            <li>
+              <strong>End and a native end event arrive together.</strong> There
+              is one teardown and one handoff, with the original failure
+              preserved if relevant.
+            </li>
+            <li>
+              <strong>A user switches accounts during a request.</strong> The
+              old response cannot alter the new user’s expiry or auth state.
+            </li>
+            <li>
+              <strong>The app backgrounds and returns.</strong> Re-check
+              wall-clock expiry and observe real two-party capture recovery on
+              each platform.
+            </li>
+            <li>
+              <strong>The process is killed.</strong> Do not expect JavaScript
+              cleanup or a post-session navigation event to run.
+            </li>
+          </ul>
+          <p>
+            That final case marks an actual limit. An OS kill is not another
+            callback to handle. Recovery has to come from durable booking
+            history or a server-backed entry point, not from assuming an
+            in-process exit handler always gets a turn.
+          </p>
+          <p>
+            Each subsystem has a specific responsibility. The SDK reports the
+            meeting state. The backend defines the token’s lifetime. The
+            navigation layer owns the route. The client coordinates those facts,
+            and rejects late events that no longer belong to the current
+            session. That is what makes a simple Join or Leave button
+            dependable.
+          </p>
+
+          <section
+            id="references"
+            class="article-sources"
+            aria-labelledby="references-title"
+          >
+            <h2 id="references-title">References &amp; scope</h2>
+            <p>
+              This account is based on The Peer Network project’s architecture,
+              native-video, navigation, and data-fetching documentation,
+              provided as reference for my summer 2026 work. It describes the
+              documented design, including its limitations. Code snippets above
+              are simplified explanations; internal source files and project
+              documents are not reproduced here.
+            </p>
+            <ul>
+              <li>
+                <a href="https://docs.expo.dev/workflow/customizing/"
+                  >Expo: Add custom native code</a
+                >
+                — why this module requires a native development build.
+              </li>
+              <li>
+                <a
+                  href="https://reactnavigation.org/docs/stack-actions/#replace"
+                  >React Navigation: StackActions.replace</a
+                >
+                — replacing the completed meeting route.
+              </li>
+            </ul>
+          </section>
+          <div class="article-end">
+            <p>
+              More about
+              <a href="../../#experience">my work at The Peer Network</a>, or
+              <a href="mailto:zhan5639@purdue.edu">get in touch</a>.
+            </p>
+            <a class="text-link" href="../">← All articles</a>
+          </div>
+        </article>
+      </div>
+    </main>
+    <footer class="site-footer page-width">
+      <button class="replay-boot" type="button" data-replay-boot hidden>
+        Replay loading screen
+      </button>
+      <span>© 2026 William Zhang</span><a href="#">Back to top ↑</a
+      ><a href="../../">Portfolio ↗</a>
+    </footer>
+  </body>
+</html>

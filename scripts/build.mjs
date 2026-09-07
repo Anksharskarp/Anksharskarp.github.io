@@ -6,11 +6,12 @@ const dist = join(root, "dist");
 
 const include = [
   "index.html",
+  "blog",
   "assets",
   "images",
   "LICENSE",
   "README.md",
-  ".nojekyll"
+  ".nojekyll",
 ];
 
 if (existsSync(dist)) {

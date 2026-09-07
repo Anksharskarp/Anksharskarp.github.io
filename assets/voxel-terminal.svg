@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 340" fill="none">
+  <!-- Isometric grid and a terminal built from flat, block-shaped faces. -->
+  <g stroke="#d0d4cb" stroke-width="1">
+    <path d="m30 256 164 76 180-94M54 240l164 76M78 226l164 76M102 212l164 76M126 198l164 76M150 184l164 76M174 170l164 76M198 156l164 76M30 256l168-100M54 268l168-100M78 280l168-100M102 292l168-100M126 304l168-100M150 316l168-100M174 328l168-100"/>
+  </g>
+  <path d="m72 260 110 50 144-78-110-48z" fill="#dce0d7"/>
+  <path d="m100 258 85 40 105-60-85-40z" fill="#c4c8bd"/>
+  <path d="m100 258 85 40v10l-85-40z" fill="#959d8e"/>
+  <path d="m185 298 105-60v10l-105 60z" fill="#7d8876"/>
+  <path d="m168 175 27 12v67l-27-12z" fill="#a4ae9b"/>
+  <path d="m195 187 24-14v67l-24 14z" fill="#84917c"/>
+  <path d="m148 248 35 16 46-26-35-16z" fill="#c6ccbf"/>
+  <path d="m148 248 35 16v8l-35-16z" fill="#a1ac96"/>
+  <path d="m183 264 46-26v8l-46 26z" fill="#798770"/>
+  <path d="m78 69 43-25 188 62-43 26z" fill="#d5d9cd"/>
+  <path d="m266 132 43-26v132l-43 25z" fill="#8a9582"/>
+  <path d="M78 69v133l188 61V132z" fill="#adb8a2"/>
+  <path d="m90 85 164 54v106L90 191z" fill="#252d27" stroke="#cdd4c4" stroke-width="2"/>
+  <path d="m99 98 146 48v13L99 111z" fill="#3c463c"/>
+  <g fill="#99a98e"><path d="m106 103 5 2v5l-5-2zM117 107l5 1v5l-5-1zM128 110l5 2v5l-5-2z"/></g>
+  <g fill="#c7d3bb">
+    <path d="m108 132 6 2v6l-6-2zM114 140l6 2v6l-6-2zM120 148l6 2v6l-6-2zM114 152l6 2v6l-6-2zM108 156l6 2v6l-6-2zM139 165l24 8v6l-24-8z"/>
+    <path d="m107 182 68 22v3l-68-22z" opacity=".55"/>
+    <path d="m107 191 112 37v3l-112-37z" opacity=".25"/>
+  </g>
+  <path d="m246 245 5 2v5l-5-2z" fill="#bac8ac"/>
+  <!-- Keyboard. -->
+  <path d="m82 267 69 24 55-30-69-23z" fill="#d6dccf"/>
+  <path d="m82 267 69 24v7l-69-24z" fill="#a9b39e"/>
+  <path d="m151 291 55-30v7l-55 30z" fill="#86937a"/>
+  <g stroke="#8c9882" stroke-width="3"><path d="m101 260 57 19M112 253l57 19M123 247l57 19M100 265l32-17M112 269l32-17M124 273l32-17M136 277l32-17M148 281l32-17"/></g>
+  <!-- Three loose voxels repeat in the loading animation. -->
+  <g stroke="#f4f4f1" stroke-width="1"><path d="m314 173 19-11 19 11-19 11z" fill="#d2d6cc"/><path d="m314 173 19 11v22l-19-11z" fill="#afb7a6"/><path d="m333 184 19-11v22l-19 11z" fill="#86937a"/>
+  <path d="m44 193 15-9 15 9-15 9z" fill="#d6ddce"/><path d="m44 193 15 9v18l-15-9z" fill="#aab79c"/><path d="m59 202 15-9v18l-15 9z" fill="#849577"/>
+  <path d="m287 49 12-7 12 7-12 7z" fill="#d6ddce"/><path d="m287 49 12 7v14l-12-7z" fill="#aab79c"/><path d="m299 56 12-7v14l-12 7z" fill="#849577"/></g>
+</svg>
