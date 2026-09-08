@@ -7,6 +7,7 @@ export const styleOrder = [
   "theme",
   "responsive",
   "logic-board",
+  "tools",
 ];
 export function compileStyles(root) {
   return (

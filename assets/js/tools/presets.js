@@ -1,0 +1,16 @@
+export const presets = {
+  direction: [
+    { name: "Logistic growth", first: "a*y*(1-y/b)", a: 1, b: 2, c: 1, bounds: [-4, 6, -1, 3], seed: [0, 0.5] },
+    { name: "Exponential growth", first: "a*y", a: 0.5, b: 1, c: 1, bounds: [-4, 6, -1, 5], seed: [0, 1] },
+    { name: "Periodic input", first: "sin(t)-a*y", a: 0.5, b: 1, c: 1, bounds: [-6, 10, -3, 3], seed: [0, 1] },
+    { name: "Linear equation", first: "t-y", a: 1, b: 1, c: 1, bounds: [-4, 6, -4, 6], seed: [0, 1] },
+    { name: "Finite-time blow-up", first: "y^2", a: 1, b: 1, c: 1, bounds: [-2, 2, -1, 5], seed: [0, 1] },
+  ],
+  phase: [
+    { name: "Damped oscillator", first: "y", second: "-a*x-b*y", a: 1, b: 0.25, c: 1, bounds: [-4, 4, -4, 4], seed: [2, 0] },
+    { name: "Saddle", first: "x", second: "-y", a: 1, b: 1, c: 1, bounds: [-4, 4, -4, 4], seed: [0.5, 2] },
+    { name: "Predator–prey", first: "a*x-b*x*y", second: "b*x*y-c*y", a: 1, b: 1, c: 1, bounds: [-0.5, 4, -0.5, 4], seed: [2, 1] },
+    { name: "Van der Pol oscillator", first: "y", second: "a*(1-x^2)*y-x", a: 1, b: 1, c: 1, bounds: [-4, 4, -4, 4], seed: [0.5, 0] },
+    { name: "Pendulum", first: "y", second: "-a*sin(x)-b*y", a: 1, b: 0.2, c: 1, bounds: [-7, 7, -4, 4], seed: [2, 0] },
+  ],
+};

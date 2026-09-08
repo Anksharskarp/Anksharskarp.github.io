@@ -8,6 +8,7 @@ mkdirSync(dist, { recursive: true });
 for (const name of [
   "index.html",
   "blog",
+  "tools",
   "assets",
   "images",
   "LICENSE",

@@ -4,6 +4,7 @@ export const destinations = Object.freeze({
   experience: "#experience",
   about: "#about",
   blog: "blog/",
+  tools: "tools/",
   writing: "#writing",
   contact: "#contact",
   resume: "assets/documents/william-zhang-resume-august-2026.pdf",
@@ -33,7 +34,7 @@ export function initTerminal() {
     const command = raw.toLowerCase().replace(/^\//, "");
     if (command === "help") {
       feedback.textContent =
-        "Commands: /work, /experience, /about, /blog, /writing, /contact, /resume, /clear. ↑ and ↓ browse command history.";
+        "Commands: /work, /experience, /about, /blog, /tools, /writing, /contact, /resume, /clear. ↑ and ↓ browse command history.";
       return;
     }
     if (command === "clear") {

@@ -97,5 +97,12 @@ export function renderSite(root) {
       }),
     );
   }
+  output.set("tools/index.html", page(root, site, {
+    title: `Differential equations — Tools — ${site.name}`,
+    description: "Direction fields, phase planes, solution curves, and equilibrium analysis for ordinary differential equations.",
+    prefix: "../",
+    tools: true,
+    body: template(root, "tools"),
+  }));
   return output;
 }
