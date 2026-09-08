@@ -9,7 +9,8 @@
   --accent: #454f46;
   --terminal: #e9ece5;
   --terminal-muted: #60665e;
-  --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --mono:
+    "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
   --sans:
     -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   --width: 1160px;

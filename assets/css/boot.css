@@ -51,40 +51,17 @@ html[data-booting] body > :not(.boot-screen) {
 .boot-voxels {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 8px;
   height: 42px;
   padding-left: 7px;
 }
 .boot-voxels i {
-  position: relative;
   display: block;
-  width: 22px;
-  height: 25px;
-  background: #a5b197;
-  transform: skewY(30deg);
+  width: 32px;
+  height: 38px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 38'%3E%3Cpath fill='%23d4dccb' d='m0 9 16-9 16 9-16 10z'/%3E%3Cpath fill='%23a5b197' d='m0 9 16 10v19L0 28z'/%3E%3Cpath fill='%237b8b70' d='m16 19 16-10v19l-16 10z'/%3E%3C/svg%3E")
+    center / contain no-repeat;
   animation: voxel-arrive 480ms steps(4, end) both;
-}
-.boot-voxels i::before {
-  content: "";
-  position: absolute;
-  width: 22px;
-  height: 13px;
-  top: -13px;
-  left: 0;
-  background: #d4dccb;
-  transform: skewX(-60deg);
-  transform-origin: bottom;
-}
-.boot-voxels i::after {
-  content: "";
-  position: absolute;
-  width: 22px;
-  height: 25px;
-  right: -22px;
-  top: 0;
-  background: #7b8b70;
-  transform: skewY(-60deg);
-  transform-origin: left;
 }
 .boot-voxels i:nth-child(2) {
   animation-delay: 140ms;
