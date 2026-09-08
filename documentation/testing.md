@@ -42,6 +42,8 @@ Browser tests cover:
 - Model rotation, reset, selection, keyboard input, context-loss fallback, and
   failure to load the optional module.
 - Loading-screen skip/replay, once-per-tab behavior, and reduced motion.
+- Slow document loading, blocked storage, and unavailable modal dialogs.
+- Vertical touch scrolling over the model without trapping the page.
 - Article navigation and the fallback diagram with JavaScript disabled.
 - WCAG A/AA automated checks on desktop and mobile.
 - Résumé availability and the absence of Three.js requests on article pages.

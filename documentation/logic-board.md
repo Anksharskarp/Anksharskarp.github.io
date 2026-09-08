@@ -28,6 +28,11 @@ a clicked mesh by walking up to its component group. Component buttons provide t
 same selection without requiring precise pointer interaction. Selected geometry is
 slightly enlarged; the accompanying text explains its function.
 
+The caption uses a compact technical label. Component descriptions live in a native
+“Board details” disclosure, collapsed by default. Rotation controls stay visible;
+clicking a component in the model opens its description. The disclosure also works
+without JavaScript, and unavailable-3D cases hide both sets of interactive buttons.
+
 The camera is orthographic. Dragging changes its azimuth and elevation. Arrow
 buttons and keyboard arrows rotate and tilt it; Reset and the Home key restore the
 initial view. Tilt is bounded so the board remains understandable. There is no

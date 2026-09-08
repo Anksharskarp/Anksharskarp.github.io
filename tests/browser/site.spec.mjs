@@ -82,6 +82,8 @@ test("3D board rotates, resets, labels components, and falls back on context los
   await page.getByRole("button", { name: "Reset", exact: true }).click();
   await page.waitForTimeout(100);
   expect(original.equals(await canvas.screenshot())).toBe(true);
+  await expect(board.locator(".board-details")).not.toHaveAttribute("open", "");
+  await board.locator(".board-details summary").click();
   await page.getByRole("button", { name: "DIMM slots", exact: true }).click();
   await expect(board).toHaveAttribute("data-selected-part", "memory");
   await expect(board.locator("[data-board-description]")).toContainText(
@@ -96,7 +98,7 @@ test("3D board rotates, resets, labels components, and falls back on context los
   );
   await expect(board).toHaveAttribute("data-board-state", "fallback");
   await expect(board.locator(".board-fallback")).toBeVisible();
-  await expect(board.locator(".board-controls")).toBeHidden();
+  await expect(board.locator(".board-controls:visible")).toHaveCount(0);
 });
 test("unavailable WebGL and failed model downloads preserve the rest of the site", async ({
   page,
@@ -168,7 +170,7 @@ test("pages, article links, and diagram work with JavaScript disabled", async ({
   await page.goto("http://127.0.0.1:4175/");
   await expect(page.locator("h1")).toBeVisible();
   await expect(page.locator(".board-fallback")).toBeVisible();
-  await expect(page.locator(".board-controls")).toBeHidden();
+  await expect(page.locator(".board-controls:visible")).toHaveCount(0);
   await page.getByRole("link", { name: "Blog", exact: true }).click();
   await page.getByRole("link", { name: /Managing video calls/ }).click();
   await expect(page.locator("h1")).toHaveText(
@@ -215,4 +217,91 @@ test("the PDF remains available and blog pages never load Three.js", async ({
   );
   expect(pdf.ok()).toBe(true);
   expect(pdf.headers()["content-type"]).toContain("pdf");
+});
+
+test("the intro fails open and does not restart after a delayed document load", async ({
+  page,
+}) => {
+  await page.route("**/assets/js/components/navigation.js", async (route) => {
+    await new Promise((resolve) => setTimeout(resolve, 3100));
+    await route.continue();
+  });
+  await page.goto("/", { waitUntil: "commit" });
+  await expect(page.locator("html")).toHaveAttribute("data-booting", "");
+  await expect(page.locator("html")).not.toHaveAttribute("data-booting", "", {
+    timeout: 4000,
+  });
+  await page.waitForLoadState("domcontentloaded");
+  await expect(page.locator("dialog")).toHaveCount(0);
+  await expect(page.locator("h1")).toBeVisible();
+});
+
+test("blocked storage and dialog failure do not leave the page hidden", async ({
+  browser,
+}) => {
+  for (const mode of ["storage", "dialog"]) {
+    const context = await browser.newContext();
+    await context.addInitScript((mode) => {
+      if (mode === "storage")
+        Object.defineProperty(window, "sessionStorage", {
+          get() {
+            throw new Error("Storage blocked");
+          },
+        });
+      else
+        HTMLDialogElement.prototype.showModal = function () {
+          throw new Error("Dialog unavailable");
+        };
+    }, mode);
+    const page = await context.newPage();
+    await page.goto("http://127.0.0.1:4175/");
+    await expect(page.locator("html")).not.toHaveAttribute("data-booting", "", {
+      timeout: 4000,
+    });
+    await expect(page.locator("h1")).toBeVisible();
+    await context.close();
+  }
+});
+
+test("a vertical touch swipe over the model still scrolls the mobile page", async ({
+  browser,
+}) => {
+  const context = await browser.newContext({
+    viewport: { width: 390, height: 844 },
+    isMobile: true,
+    hasTouch: true,
+  });
+  const page = await context.newPage();
+  await skipBoot(page);
+  await page.goto("http://127.0.0.1:4175/");
+  await expect(page.locator("[data-logic-board]")).toHaveAttribute(
+    "data-board-state",
+    "ready",
+  );
+  const canvas = page.locator(".board-viewport canvas");
+  await canvas.scrollIntoViewIfNeeded();
+  const box = await canvas.boundingBox(),
+    start = await page.evaluate(() => scrollY),
+    x = box.x + box.width / 2,
+    y = box.y + box.height * 0.8;
+  const cdp = await context.newCDPSession(page);
+  await cdp.send("Input.dispatchTouchEvent", {
+    type: "touchStart",
+    touchPoints: [{ x, y }],
+  });
+  for (let i = 1; i <= 6; i++) {
+    await cdp.send("Input.dispatchTouchEvent", {
+      type: "touchMove",
+      touchPoints: [{ x, y: y - i * 25 }],
+    });
+    await page.waitForTimeout(30);
+  }
+  await cdp.send("Input.dispatchTouchEvent", {
+    type: "touchEnd",
+    touchPoints: [],
+  });
+  await expect
+    .poll(() => page.evaluate(() => scrollY))
+    .toBeGreaterThan(start + 40);
+  await context.close();
 });

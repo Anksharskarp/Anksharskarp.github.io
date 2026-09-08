@@ -80,6 +80,7 @@ export function mountViewer(root) {
           String(button.dataset.boardPart === id),
         ),
       );
+    root.querySelector(".board-details").open = true;
     label.textContent = `${parts[id].name}: ${parts[id].description}`;
     for (const [key, group] of Object.entries(model.groups))
       group.traverse((object) => {
@@ -216,7 +217,9 @@ export function mountViewer(root) {
   function fallback() {
     dispose();
     root.dataset.boardState = "fallback";
-    root.querySelector(".board-controls").hidden = true;
+    root.querySelectorAll(".board-controls").forEach((controls) => {
+      controls.hidden = true;
+    });
     label.textContent = "Diagram shown. The interactive view is unavailable.";
   }
   canvas.addEventListener(
@@ -249,9 +252,11 @@ export function mountViewer(root) {
     stage.append(canvas);
     render();
     root.dataset.boardState = "ready";
-    root.querySelector(".board-controls").hidden = false;
+    root.querySelectorAll(".board-controls").forEach((controls) => {
+      controls.hidden = false;
+    });
     label.textContent =
-      "Drag to rotate, or use the controls. Select a component for its function.";
+      "Select a component for its function. Drag the model or use the arrows to change the view.";
     return { dispose };
   } catch (error) {
     dispose();

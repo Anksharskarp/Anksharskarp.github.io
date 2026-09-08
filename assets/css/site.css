@@ -2203,14 +2203,14 @@ a.text-link {
   visibility: hidden;
 }
 .board-caption {
-  padding: 14px 16px 16px;
+  padding: 10px 12px;
   border-top: 1px solid var(--line);
   background: var(--page);
-  font: 10px/1.7 var(--mono);
+  font: 9px/1.6 var(--mono);
 }
 .board-caption strong {
   display: block;
-  font-size: 12px;
+  font-size: 11px;
   margin-bottom: 4px;
 }
 .board-caption p {
@@ -2235,7 +2235,10 @@ a.text-link {
   gap: 6px;
 }
 .board-parts {
-  margin-top: 10px;
+  margin-top: 0;
+  border: 0;
+  padding: 0;
+  background: transparent;
 }
 .board-controls button {
   font: 10px/1.4 var(--mono);
@@ -2254,12 +2257,48 @@ a.text-link {
   color: var(--page);
   background: var(--ink);
 }
-.board-description {
-  font: 10px/1.75 var(--mono);
-  padding: 0 16px 14px;
-  background: var(--page);
+.board-details {
+  border-top: 1px solid var(--line);
+  background: var(--panel);
+}
+.board-details > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 12px;
+  margin: 0;
+  list-style: none;
+  font: 10px/1.5 var(--mono);
+}
+.board-details > summary::-webkit-details-marker {
+  display: none;
+}
+.board-details > summary::after {
+  content: "+";
   color: var(--muted);
-  min-height: 62px;
+}
+.board-details[open] > summary {
+  margin: 0;
+  border-bottom: 1px solid var(--line);
+}
+.board-details[open] > summary::after {
+  content: "−";
+}
+.board-detail-body {
+  display: grid;
+  gap: 12px;
+  padding: 12px;
+}
+.board-components,
+.board-description {
+  margin: 0;
+  color: var(--muted);
+  font: 10px/1.6 var(--mono);
+}
+.board-description {
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
 }
 @media (max-width: 560px) {
   .hero-art.logic-board {
@@ -2269,7 +2308,7 @@ a.text-link {
     width: 100%;
   }
   .board-caption strong {
-    font-size: 12px;
+    font-size: 11px;
   }
   .board-viewport {
     aspect-ratio: 4/3;

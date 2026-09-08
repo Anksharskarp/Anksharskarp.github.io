@@ -37,7 +37,6 @@
       </div>
       <figcaption class="board-caption">
         <strong id="board-title">MB-01 / Desktop logic board</strong>
-        <p>CPU socket · DIMM · PCIe x16 · VRM · Rear I/O · 24-pin ATX power</p>
         <p class="board-specification">Illustrative layout · not to scale</p>
       </figcaption>
       <div class="board-controls" hidden>
@@ -56,26 +55,44 @@
             ↓</button
           ><button type="button" data-board-view="reset">Reset</button>
         </div>
-        <div class="board-parts" role="group" aria-label="Board components">
-          <button type="button" data-board-part="cpu" aria-pressed="false">
-            CPU socket</button
-          ><button type="button" data-board-part="memory" aria-pressed="false">
-            DIMM slots</button
-          ><button type="button" data-board-part="pcie" aria-pressed="false">
-            PCIe x16</button
-          ><button type="button" data-board-part="vrm" aria-pressed="false">
-            VRM</button
-          ><button type="button" data-board-part="io" aria-pressed="false">
-            Rear I/O</button
-          ><button type="button" data-board-part="power" aria-pressed="false">
-            ATX power
-          </button>
-        </div>
       </div>
-      <p class="board-description" data-board-description role="status">
-        CPU: processor · DIMM: memory · PCIe: expansion · VRM: voltage
-        regulation · I/O: external connections.
-      </p>
+      <details class="board-details">
+        <summary>Board details</summary>
+        <div class="board-detail-body">
+          <p class="board-components">
+            CPU socket · DIMM memory · PCIe x16 expansion · VRM power regulation
+            · Rear I/O · 24-pin ATX power
+          </p>
+          <div
+            class="board-controls board-parts"
+            hidden
+            role="group"
+            aria-label="Board components"
+          >
+            <button type="button" data-board-part="cpu" aria-pressed="false">
+              CPU socket</button
+            ><button
+              type="button"
+              data-board-part="memory"
+              aria-pressed="false"
+            >
+              DIMM slots</button
+            ><button type="button" data-board-part="pcie" aria-pressed="false">
+              PCIe x16</button
+            ><button type="button" data-board-part="vrm" aria-pressed="false">
+              VRM</button
+            ><button type="button" data-board-part="io" aria-pressed="false">
+              Rear I/O</button
+            ><button type="button" data-board-part="power" aria-pressed="false">
+              ATX power
+            </button>
+          </div>
+          <p class="board-description" data-board-description role="status">
+            CPU: processor · DIMM: memory · PCIe: expansion · VRM: voltage
+            regulation · I/O: external connections.
+          </p>
+        </div>
+      </details>
     </figure>
   </div>
   <div class="hero-caption">
