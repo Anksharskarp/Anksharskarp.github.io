@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "generate": "node scripts/generate.mjs",
+    "check:generated": "node scripts/check-generated.mjs",
     "build": "node scripts/build.mjs",
     "preview": "python3 -m http.server 4174 --bind 127.0.0.1 -d dist",
     "test": "node --test tests/unit/*.test.mjs",

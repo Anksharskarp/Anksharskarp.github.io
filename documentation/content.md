@@ -75,3 +75,16 @@ focusable, following the existing article.
 Shared contact links and résumé location come from `content/site.json`. Education,
 coursework, skills, and the introductory text live in their named partials. Changing
 the featured project, a photograph, or a diagram never requires editing every page.
+
+## Tools and examples
+
+The differential-equations utility is generated from `src/templates/tools.html`.
+Example names, equations, parameters, bounds, and initial values live in
+`assets/js/tools/presets.js`, separate from work and blog content. See
+[Tools](tools.md#adding-examples-tools-or-pages) for the preset format and adding a
+utility with the shared page shell. Method notes and numerical limits must remain
+consistent with the implementation.
+
+After editing a template or navigation, run `npm run generate` and commit generated
+HTML and CSS as well as source. `npm run check:generated` detects missing or stale
+public files. A source-only commit does not update branch-root GitHub Pages.

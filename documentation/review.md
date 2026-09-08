@@ -1,5 +1,77 @@
 # Stability review
 
+## September 8, 2026: Tools page
+
+The differential-equations workspace is generated at `tools/index.html`. It uses
+the shared page renderer, navigation, footer, loading introduction, and neutral
+terminal styles. Both the main navigation and the `/tools` terminal command reach
+it. Its browser entry point is supplied through `page()`'s `modulePath` option;
+the equation parser, solver, analysis, plots, presets, and interactions are separate
+modules. See [Tools](tools.md) for their responsibilities and extension points.
+
+### Publishing issue
+
+The earlier commit contained the authoring template and JavaScript, but generation
+had not run before the work was interrupted. `tools/index.html` was absent, and
+the committed homepage and blog navigation still lacked Tools. The live homepage
+also showed the old navigation when checked. The existing GitHub Pages setup serves
+repository-root files; it does not execute the Node generator.
+
+Generation now includes the Tools page, navigation in every page, and the Tools CSS
+in the public bundle. The new read-only `npm run check:generated` check was verified
+to fail on the missing/stale files and pass after building. The next publishing
+commit must include the new `tools/` directory as well as modified files. Local
+generation and verification do not push or deploy changes.
+
+### Review findings
+
+- Removed a keyboard handler that prevented Tab from leaving the plot. Arrow keys
+  and Enter remain available for placing initial values.
+- Confirmed that invalid edits preserve the last applied plot and cannot be used
+  to add curves until corrected. Equation text is parsed with a restricted math
+  grammar and rendered as text, without JavaScript execution.
+- Refined equilibrium searches to avoid duplicate multiple-root candidates and
+  false roots caused by unequal equation scales or very large variation across
+  the window. A small residual alone is insufficient to accept a Newton result.
+- Refined nullcline crossings so a pole near a cell edge is not drawn as a zero.
+  The finite mesh and finite equilibrium search still have limits, stated on the
+  page and in the Tools documentation.
+- Bounded numerical work and rejected invalid integration limits. Incomplete
+  integrations report their stopping reason; local tolerance does not imply an
+  exact blow-up time or a bound on total error.
+- Clear previous saddle-branch labels when an equation or parameter changes.
+  Those labels describe the previous system and cannot safely carry over.
+- Confirmed that zooming changes the view without changing numerical samples,
+  exports contain the displayed configuration's data, and vertical touch swipes
+  scroll the page without creating accidental solutions.
+
+### Verification results
+
+- **22 unit tests passed:** 9 site-generation/content checks and 13 numerical checks.
+  Numerical tests use analytic polynomial, exponential, and oscillator solutions,
+  Euler convergence, singularities, known Jacobians and roots, and pole cases.
+- **24 browser tests passed** in Google Chrome: 13 existing-site checks, expanded
+  to include Tools, and 11 dedicated Tools checks. They cover navigation, equation
+  edits, all 10 presets, plot input, keyboard focus, zoom/reset, sample inspection,
+  equilibrium analysis, saddle branches, exports, and failure states.
+- All four pages were checked at seven widths from 320 to 1440 pixels, with no
+  horizontal overflow. Both Tools modes also passed with expanded settings at
+  seven widths, including the layout transition at 850 pixels.
+- **10 automated accessibility scans reported no violations** for the configured
+  WCAG 2 A/AA and WCAG 2.1 AA rules: four pages at desktop/mobile widths, plus
+  expanded phase-plane results at both widths.
+- A fresh build generated **4 pages and validated 94 link and asset references**.
+  `npm run check:generated` confirmed that the public HTML and CSS match sources.
+- Final desktop and mobile screenshots were inspected, including the mobile links
+  between equations and the plot. The existing résumé, blog, loader, terminal, and
+  PCB tests passed. Tools makes no Three.js requests.
+
+The browser and accessibility limits below still apply. Numerical results are
+approximations for smooth, non-stiff real ODEs; this is not a symbolic solver or a
+proof of equilibrium completeness or nonlinear stability.
+
+## September 7, 2026: Portfolio and logic board
+
 Reviewed September 7, 2026. The review preserves the approved neutral terminal/voxel
 design while separating content, page rendering, styles, and optional browser
 features. The static computer illustration is replaced by the interactive logic

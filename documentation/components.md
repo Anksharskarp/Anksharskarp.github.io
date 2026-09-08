@@ -27,6 +27,12 @@ reduced-motion, and session-storage behavior. The initial intro expires after
 1.65 seconds; a fail-safe also releases the page if setup stalls. A late document
 load cannot reopen an intro whose initial fail-safe has already expired.
 
+The Tools page uses a separate `assets/js/tools/workspace.js` entry point, chosen by
+the shared renderer. It does not initialize homepage components. Equation parsing,
+integration, and analysis remain independent of the browser UI; rendering and
+interaction modules consume their results. Follow this boundary for future
+utilities. See [Tools](tools.md) for the module map and extension procedure.
+
 For a new component:
 
 1. Render useful baseline HTML in its template.
@@ -49,6 +55,7 @@ stylesheet. The order lives in `scripts/lib/styles.mjs`:
 4. `theme.css`: established neutral terminal/voxel appearance.
 5. `responsive.css`: existing screen-width, reduced-motion, and print rules.
 6. `logic-board.css`: the model's isolated layout, controls, and fallback.
+7. `tools.css`: the differential-equations workspace and its responsive rules.
 
 The split preserves the original cascade order. Structural styles and theme
 adjustments sometimes target the same selector; this is intentional to avoid
@@ -59,8 +66,10 @@ once in `styleOrder`. Use existing variables instead of adding unrelated colors.
 ## Interaction and accessibility
 
 Use native links for navigation and buttons for actions. Provide visible focus
-states, accessible names, and keyboard controls. Do not hide essential content
-behind JavaScript. Keep the main document scrollable on mobile; the 3D canvas uses
+states, accessible names, and keyboard controls. Keep descriptions and method notes
+available without JavaScript. Calculators that require JavaScript should start
+with disabled controls and an explanation, then enable controls after successful
+initialization. Keep the main document scrollable on mobile; the 3D canvas uses
 `touch-action: pan-y pinch-zoom` so a vertical swipe or pinch remains a browser action.
 Scrollable code blocks and tables must be keyboard focusable. Respect reduced
 motion, and avoid continuous decorative animation.

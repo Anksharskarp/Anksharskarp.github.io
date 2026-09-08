@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
-const paths = ["/", "/blog/", "/blog/keeping-a-call-alive/"];
+const paths = ["/", "/blog/", "/blog/keeping-a-call-alive/", "/tools/"];
 const skipBoot = (page) =>
   page.addInitScript(() =>
     sessionStorage.setItem("wz.portfolio.intro.v2", "seen"),

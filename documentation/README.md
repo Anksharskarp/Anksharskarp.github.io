@@ -7,6 +7,7 @@ Start here before changing content or adding a component.
 - [Content updates](content.md): adding work experience, projects, and blog posts.
 - [Components](components.md): JavaScript, CSS, accessibility, and extension points.
 - [3D logic board](logic-board.md): geometry, labels, controls, rendering, and fallback behavior.
+- [Tools and differential equations](tools.md): modes, numerical modules, controls, limits, and extension points.
 - [Development and testing](testing.md): setup, commands, checks, and deployment.
 - [Stability review](review.md): findings, changes, evidence, and remaining limits.
 

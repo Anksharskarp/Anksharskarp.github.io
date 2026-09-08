@@ -36,9 +36,14 @@ test("the existing site renders with its public URLs and links intact", () => {
   const pages = renderSite(root);
   assert.deepEqual(
     [...pages.keys()],
-    ["index.html", "blog/index.html", "blog/keeping-a-call-alive/index.html"],
+    [
+      "index.html",
+      "blog/index.html",
+      "blog/keeping-a-call-alive/index.html",
+      "tools/index.html",
+    ],
   );
-  assert.equal(validateSite(root, pages).pages, 3);
+  assert.equal(validateSite(root, pages).pages, 4);
   const home = pages.get("index.html");
   for (const fact of [
     "Undergraduate AI Researcher",
@@ -154,6 +159,7 @@ test("validation detects missing files, duplicate IDs, broken anchors, and event
 test("legacy commands resolve, but inherited properties and HTML are ordinary unknown input", () => {
   assert.equal(commandDestination("projects"), "#work");
   assert.equal(commandDestination("education"), "#about");
+  assert.equal(commandDestination("tools"), "tools/");
   assert.equal(resolveAlias("timeline"), "experience");
   for (const input of [
     "constructor",
