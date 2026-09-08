@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-labelledby="title description">
+<title id="title">Desktop logic board component diagram</title><desc id="description">Illustrative layout with CPU socket, DIMM memory slots, PCIe x16 expansion, voltage regulation, rear I/O, and 24-pin ATX power.</desc>
+<rect x="38" y="26" width="324" height="246" fill="#89927f" stroke="#5e6a58" stroke-width="2"/>
+<g fill="none" stroke="#bac3af" stroke-width="2"><path d="M143 108v116h144M153 108v108h144M163 108v100h134M173 108v92h114M183 108v84h104M172 96V45h140M182 96V52h130M192 96V59h120"/></g>
+<g fill="#e5e8df" stroke="#63735a" stroke-width="2"><circle cx="50" cy="38" r="4"/><circle cx="350" cy="38" r="4"/><circle cx="50" cy="260" r="4"/><circle cx="350" cy="260" r="4"/></g>
+<rect x="104" y="84" width="96" height="84" fill="#cdd1c7"/><rect x="116" y="96" width="72" height="60" fill="#363e36"/>
+<g fill="#535d4e" stroke="#d2d7ca" stroke-width="3"><path d="M230 60h8v118h-8zM250 60h8v118h-8zM270 60h8v118h-8zM290 60h8v118h-8z"/></g>
+<g fill="#b9c0af"><path d="M104 53h18v16h-18zM129 53h18v16h-18zM154 53h18v16h-18zM179 53h18v16h-18z"/><path d="M44 70h31v35H44zM44 116h31v35H44zM44 162h31v35H44z"/></g>
+<g fill="#252d27"><path d="M44 78h18v19H44zM44 124h18v19H44zM44 170h18v19H44z"/></g>
+<rect x="90" y="208" width="194" height="14" fill="#d5d9cd" stroke="#4c5944"/><path d="M96 215h180" stroke="#404c39" stroke-width="3"/>
+<rect x="324" y="77" width="23" height="73" fill="#d5d9cd"/>
+<path d="M330 82v63M341 82v63" stroke="#536348" stroke-width="4" stroke-dasharray="3 3"/>
+<g font-family="monospace" font-size="10" fill="#263021" text-anchor="middle"><text x="152" y="131" fill="#e2e6dc">CPU</text><text x="154" y="47">VRM</text><text x="263" y="53">DIMM</text><text x="188" y="241">PCIe x16</text><text x="335" y="69">ATX</text><text x="60" y="216">I/O</text><text x="269" y="259" font-size="8">WZ / MB-01</text></g>
+</svg>

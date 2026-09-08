@@ -1,0 +1,84 @@
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-layout">
+    <div class="hero-copy">
+      <p class="eyebrow">
+        <span class="prompt-mark" aria-hidden="true">~/</span>
+        william-zhang
+      </p>
+      <h1 id="hero-title">
+        William<br />Zhang<span class="name-period" aria-hidden="true">_</span>
+      </h1>
+      <p class="hero-intro">
+        Computer Science &amp; Mathematics at Purdue.<br />Mobile development,
+        machine learning, and research.
+      </p>
+      <div class="hero-actions">
+        <a class="pixel-button" href="#work"
+          >View work <span aria-hidden="true">↓</span></a
+        ><a class="pixel-button secondary" href="#contact"
+          >Contact <span aria-hidden="true">↗</span></a
+        >
+      </div>
+    </div>
+    <figure
+      class="hero-art logic-board"
+      data-logic-board
+      data-board-state="fallback"
+      aria-labelledby="board-title"
+    >
+      <div class="board-viewport">
+        <img
+          class="board-fallback"
+          src="assets/logic-board.svg"
+          width="400"
+          height="300"
+          alt="Diagram of the CPU socket, DIMM memory slots, PCIe expansion, voltage regulation, rear I/O, and ATX power connector."
+        />
+      </div>
+      <figcaption class="board-caption">
+        <strong id="board-title">MB-01 / Desktop logic board</strong>
+        <p>CPU socket · DIMM · PCIe x16 · VRM · Rear I/O · 24-pin ATX power</p>
+        <p class="board-specification">Illustrative layout · not to scale</p>
+      </figcaption>
+      <div class="board-controls" hidden>
+        <div class="board-views" role="group" aria-label="Model view">
+          <button type="button" data-board-view="left" aria-label="Rotate left">
+            ←</button
+          ><button
+            type="button"
+            data-board-view="right"
+            aria-label="Rotate right"
+          >
+            →</button
+          ><button type="button" data-board-view="up" aria-label="Tilt up">
+            ↑</button
+          ><button type="button" data-board-view="down" aria-label="Tilt down">
+            ↓</button
+          ><button type="button" data-board-view="reset">Reset</button>
+        </div>
+        <div class="board-parts" role="group" aria-label="Board components">
+          <button type="button" data-board-part="cpu" aria-pressed="false">
+            CPU socket</button
+          ><button type="button" data-board-part="memory" aria-pressed="false">
+            DIMM slots</button
+          ><button type="button" data-board-part="pcie" aria-pressed="false">
+            PCIe x16</button
+          ><button type="button" data-board-part="vrm" aria-pressed="false">
+            VRM</button
+          ><button type="button" data-board-part="io" aria-pressed="false">
+            Rear I/O</button
+          ><button type="button" data-board-part="power" aria-pressed="false">
+            ATX power
+          </button>
+        </div>
+      </div>
+      <p class="board-description" data-board-description role="status">
+        CPU: processor · DIMM: memory · PCIe: expansion · VRM: voltage
+        regulation · I/O: external connections.
+      </p>
+    </figure>
+  </div>
+  <div class="hero-caption">
+    <span>West Lafayette, IN</span><span>Honors B.S. · May 2028</span>
+  </div>
+</section>

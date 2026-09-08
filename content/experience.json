@@ -1,0 +1,49 @@
+[
+  {
+    "organization": "Stesso AI",
+    "role": "Undergraduate AI Researcher",
+    "dates": "May — Aug 2026",
+    "category": "Research",
+    "paragraphsHtml": [
+      "Built an OpenCV and PyTorch pipeline to classify home-inspection photos by repair category, reaching <strong>83% test accuracy</strong> on Kaggle benchmark data.",
+      "Reduced token usage in a video-generation API workflow by <strong>16%</strong>, lowering monthly inference costs while preserving output quality."
+    ]
+  },
+  {
+    "organization": "The Peer Network",
+    "role": "Mobile App Developer Intern",
+    "dates": "May — Aug 2026",
+    "category": "Internship",
+    "paragraphsHtml": [
+      "Built the React Native iOS and Android app, scaling to <strong>over 1,000 users</strong>. Integrated Amazon Chime for counselor–patient video sessions, supporting the platform’s HIPAA and SOC 2 requirements.",
+      "Engineered a Cronofy booking platform with mutex synchronization to prevent double-booking."
+    ],
+    "link": {
+      "href": "blog/keeping-a-call-alive/",
+      "label": "Read about the implementation"
+    }
+  },
+  {
+    "organization": "Purdue Stack",
+    "role": "Project Lead & Full-Stack Developer",
+    "dates": "Sep 2025 — Present",
+    "category": "Engineering & leadership",
+    "paragraphsHtml": [
+      "Led an Electron desktop app for Professor Xiaotao Yang’s geology lab, reducing Jupyter-based seismic analysis runtime by <strong>34%</strong>. Contributed Fourier-series functionality to SeisGo, an open-source Python seismic analysis package.",
+      "Worked with eight engineers and designers to ship The Peer Network’s mobile app to the App Store and Google Play."
+    ]
+  },
+  {
+    "organization": "University of Pennsylvania",
+    "role": "Undergraduate Researcher · Perelman School of Medicine",
+    "dates": "Apr — Aug 2025",
+    "category": "Research",
+    "paragraphsHtml": [
+      "Worked in Professor Chamith Rajapakse’s lab on <strong>500,000+ emergency-room cases</strong> spanning 20 years of patient records. Built a PyTorch/Keras pipeline to predict bone-fracture risk from environmental and movement features."
+    ],
+    "details": {
+      "summary": "Device development & publication",
+      "bodyHtml": "Built an Arduino/C++ fitness tracker to quantify patient mobility and support physical-therapy outcome assessment. Co-authored an abstract and poster accepted to the 2025 New England Chapter of the American College of Sports Medicine conference."
+    }
+  }
+]

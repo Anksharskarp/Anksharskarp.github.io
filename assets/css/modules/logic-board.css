@@ -1,0 +1,119 @@
+/* Optional model: every control stays within the original hero column. */
+.logic-board {
+  align-self: center;
+  min-width: 0;
+  width: 100%;
+}
+.board-viewport {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  position: relative;
+}
+.board-viewport canvas,
+.board-viewport img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  object-fit: contain;
+}
+.board-viewport canvas {
+  touch-action: pan-y pinch-zoom;
+  cursor: grab;
+}
+.board-viewport canvas:active {
+  cursor: grabbing;
+}
+.logic-board[data-board-state="ready"] .board-fallback {
+  visibility: hidden;
+}
+.board-caption {
+  padding: 14px 16px 16px;
+  border-top: 1px solid var(--line);
+  background: var(--page);
+  font: 10px/1.7 var(--mono);
+}
+.board-caption strong {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+.board-caption p {
+  color: var(--muted);
+  margin: 4px 0 0;
+}
+.board-caption .board-specification {
+  font-size: 9px;
+}
+.board-controls {
+  padding: 12px;
+  border-top: 1px solid var(--line);
+  background: var(--panel);
+}
+.board-controls[hidden] {
+  display: none;
+}
+.board-views,
+.board-parts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.board-parts {
+  margin-top: 10px;
+}
+.board-controls button {
+  font: 10px/1.4 var(--mono);
+  color: var(--ink);
+  background: var(--page);
+  border: 1px solid var(--edge);
+  padding: 7px 9px;
+  cursor: pointer;
+  min-height: 30px;
+}
+.board-views button {
+  flex: 1;
+}
+.board-controls button:hover,
+.board-controls button[aria-pressed="true"] {
+  color: var(--page);
+  background: var(--ink);
+}
+.board-description {
+  font: 10px/1.75 var(--mono);
+  padding: 0 16px 14px;
+  background: var(--page);
+  color: var(--muted);
+  min-height: 62px;
+}
+@media (max-width: 560px) {
+  .hero-art.logic-board {
+    max-width: 100%;
+  }
+  .hero-art.logic-board img {
+    width: 100%;
+  }
+  .board-caption strong {
+    font-size: 12px;
+  }
+  .board-viewport {
+    aspect-ratio: 4/3;
+  }
+}
+@media print {
+  .board-viewport canvas,
+  .board-controls {
+    display: none !important;
+  }
+  .logic-board[data-board-state="ready"] .board-fallback {
+    visibility: visible;
+  }
+  .board-description {
+    display: none;
+  }
+}
+
+.hero-layout:has(.logic-board) .hero-copy {
+  align-self: start;
+}

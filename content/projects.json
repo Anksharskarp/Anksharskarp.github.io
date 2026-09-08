@@ -1,0 +1,24 @@
+[
+  {
+    "title": "Finmath",
+    "category": "02 / Scientific computing",
+    "dates": "2026—",
+    "description": "A Python financial mathematics package with a C/C++ backend, built with Boiler Quant. I implemented time-series utilities and options-pricing models using pybind11.",
+    "stack": ["Python", "C/C++", "pybind11", "NumPy"],
+    "link": {
+      "href": "https://github.com/Boiler-Quant/finmath",
+      "label": "View source"
+    }
+  },
+  {
+    "title": "Ecofriend",
+    "category": "03 / Mobile development",
+    "dates": "2024—",
+    "description": "A cross-platform app that helps natural-disaster victims find rebuilding resources. Built for the 2024 Congressional App Challenge and released on the App Store and Google Play.",
+    "stack": ["React Native", "TypeScript", "Expo", "Swift"],
+    "link": {
+      "href": "assets/documents/william-zhang-resume-august-2026.pdf",
+      "label": "View résumé"
+    }
+  }
+]

@@ -1,30 +1,19 @@
 import { cpSync, existsSync, mkdirSync, rmSync } from "node:fs";
 import { join } from "node:path";
-
-const root = process.cwd();
+import { generate, root } from "./generate.mjs";
+generate();
 const dist = join(root, "dist");
-
-const include = [
+rmSync(dist, { recursive: true, force: true });
+mkdirSync(dist, { recursive: true });
+for (const name of [
   "index.html",
   "blog",
   "assets",
   "images",
   "LICENSE",
-  "README.md",
   ".nojekyll",
-];
-
-if (existsSync(dist)) {
-  rmSync(dist, { recursive: true, force: true });
-}
-mkdirSync(dist, { recursive: true });
-
-for (const name of include) {
+]) {
   const source = join(root, name);
-  if (!existsSync(source)) {
-    continue;
-  }
-  cpSync(source, join(dist, name), { recursive: true });
+  if (existsSync(source)) cpSync(source, join(dist, name), { recursive: true });
 }
-
-console.log("Build complete -> dist/");
+console.log("Build complete → dist/");

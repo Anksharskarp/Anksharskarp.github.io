@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "keeping-a-call-alive",
+    "title": "Managing video calls and session expiry in React Native",
+    "pageTitle": "Video Calls and Session Expiry — William Zhang",
+    "description": "How The Peer Network’s app handles native video, expired API sessions, and navigation when a call ends.",
+    "deck": "How I worked with native video events, API session timers, and navigation in The Peer Network’s mobile app during summer 2026.",
+    "date": "2026-09-07",
+    "readMinutes": 10,
+    "context": "The Peer Network · Summer 2026",
+    "topics": ["React Native", "Native video", "Session lifecycle"],
+    "featured": true,
+    "toc": [
+      {
+        "id": "two-lifecycles",
+        "label": "01 · Two lifecycles"
+      },
+      {
+        "id": "native-boundary",
+        "label": "02 · The native boundary"
+      },
+      {
+        "id": "three-clocks",
+        "label": "03 · Session timers"
+      },
+      {
+        "id": "one-exit",
+        "label": "04 · Call exits"
+      },
+      {
+        "id": "late-responses",
+        "label": "05 · Late responses"
+      },
+      {
+        "id": "verification",
+        "label": "06 · What to verify"
+      },
+      {
+        "id": "references",
+        "label": "References"
+      }
+    ]
+  }
+]

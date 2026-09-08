@@ -4,8 +4,21 @@
   "version": "1.0.0",
   "description": "Static portfolio site with terminal UI",
   "scripts": {
-    "dev": "python3 -m http.server 4173",
+    "dev": "node scripts/dev.mjs",
+    "generate": "node scripts/generate.mjs",
     "build": "node scripts/build.mjs",
-    "preview": "python3 -m http.server 4174 -d dist"
-  }
+    "preview": "python3 -m http.server 4174 --bind 127.0.0.1 -d dist",
+    "test": "node --test tests/unit/*.test.mjs",
+    "test:browser": "playwright test",
+    "check": "npm test && npm run build && npm run test:browser"
+  },
+  "dependencies": {
+    "three": "0.185.1"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "@playwright/test": "1.63.0",
+    "parse5": "8.0.1"
+  },
+  "type": "module"
 }

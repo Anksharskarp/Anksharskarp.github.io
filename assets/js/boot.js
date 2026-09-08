@@ -15,6 +15,7 @@
   let dialog;
   let finishTimer;
   let previousFocus;
+  let initialPending = firstVisit;
 
   function finish(moveFocus = false) {
     clearTimeout(finishTimer);
@@ -88,13 +89,19 @@
 
   if (firstVisit) {
     root.setAttribute("data-booting", "");
-    finishTimer = setTimeout(finish, 2600);
+    finishTimer = setTimeout(() => {
+      initialPending = false;
+      finish();
+    }, 2600);
   }
 
   document.addEventListener(
     "DOMContentLoaded",
     () => {
-      if (firstVisit) start();
+      if (initialPending) {
+        initialPending = false;
+        start();
+      }
       document.querySelectorAll("[data-replay-boot]").forEach((button) => {
         button.hidden = false;
         button.addEventListener("click", start);
