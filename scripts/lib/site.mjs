@@ -105,8 +105,18 @@ export function renderSite(root) {
         "Direction fields, phase planes, solution curves, and equilibrium analysis for ordinary differential equations.",
       prefix: "../",
       tools: true,
+      pageClass: "tools-page",
       modulePath: "assets/js/tools/workspace.js",
-      body: template(root, "tools"),
+      body: template(
+        root,
+        "tools",
+        Object.fromEntries(
+          ["equations", "plot", "windows", "notes"].map((name) => [
+            name,
+            template(root, `tools/${name}`),
+          ]),
+        ),
+      ),
     }),
   );
   return output;

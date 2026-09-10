@@ -1,0 +1,58 @@
+<div class="ode-output">
+  <div class="ode-plot-panel" id="ode-plot-panel">
+    <div class="terminal-bar">
+      <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span
+      ><span data-plot-title>Direction field</span
+      ><span class="terminal-tag" data-count>0 solutions</span>
+    </div>
+    <div class="ode-plot-controls">
+      <div class="ode-toggles">
+        <label
+          ><input
+            type="checkbox"
+            data-field-toggle
+            checked
+            disabled
+          />Field</label
+        >
+        <label data-phase-only hidden
+          ><input type="checkbox" data-nullclines disabled />Nullclines</label
+        >
+      </div>
+      <div class="ode-view-buttons" role="group" aria-label="Plot view">
+        <button type="button" data-zoom="0.5" aria-label="Zoom in" disabled>
+          +
+        </button>
+        <button type="button" data-zoom="2" aria-label="Zoom out" disabled>
+          −
+        </button>
+        <button type="button" data-reset-view disabled>Reset view</button>
+      </div>
+      <a class="ode-jump-link" href="#ode-config">Equations ↑</a>
+    </div>
+    <div class="ode-plot" data-plot>
+      <p class="ode-plot-placeholder">
+        Direction field and solution curves appear here.
+      </p>
+    </div>
+    <div class="ode-plot-caption">
+      <span data-axis-note>Horizontal: t · Vertical: y</span
+      ><span data-cursor>Click to add a solution</span>
+    </div>
+    <p class="ode-nullcline-key" data-nullcline-key hidden>
+      <span>Solid: dx/dt = 0</span><span>Dashed: dy/dt = 0</span>
+    </p>
+  </div>
+  <p class="ode-message" id="ode-message" role="status" aria-live="polite">
+    Choose an equation, then add an initial value.
+  </p>
+  <div class="ode-action-row">
+    <p class="ode-hint" data-method-summary>Adaptive RK4 · max. step 0.1</p>
+    <button type="button" class="ode-small-button" data-clear disabled>
+      Clear solutions
+    </button>
+    <button type="button" class="ode-small-button" data-export-svg disabled>
+      Save plot (SVG)
+    </button>
+  </div>
+</div>

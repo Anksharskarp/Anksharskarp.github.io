@@ -9,6 +9,7 @@ import {
   download,
 } from "./plot.js";
 import { presets } from "./presets.js";
+import { initToolWindows } from "../components/tool-windows.js";
 
 export function initWorkspace(root) {
   if (!root) return;
@@ -17,6 +18,7 @@ export function initWorkspace(root) {
     seedForm = $("#ode-seed"),
     stage = $("[data-plot]");
   const input = (name) => form.elements.namedItem(name);
+  const windows = initToolWindows(root);
   let mode = "direction",
     config,
     system,
@@ -33,6 +35,10 @@ export function initWorkspace(root) {
   function message(text, error = false) {
     $("#ode-message").textContent = text;
     $("#ode-message").dataset.error = String(error);
+    const windowMessage = windows
+      .active()
+      ?.querySelector("[data-window-message]");
+    if (windowMessage) windowMessage.textContent = error ? text : "";
   }
   function guard(action) {
     return (event) => {
@@ -53,8 +59,8 @@ export function initWorkspace(root) {
       value > max
     ) {
       field.setAttribute("aria-invalid", "true");
-      const details = field.closest("details");
-      if (details) details.open = true;
+      const dialog = field.closest("dialog");
+      if (dialog && !dialog.open) windows.open(dialog.id);
       field.focus();
       throw new Error(`${label}: enter a number from ${min} to ${max}.`);
     }
@@ -113,6 +119,8 @@ export function initWorkspace(root) {
     $("[data-nullcline-key]").hidden =
       mode !== "phase" || !$("[data-nullclines]").checked;
     $("[data-clear]").disabled = curves.length === 0;
+    $('[data-open-window="ode-solution-window"]').disabled =
+      curves.length === 0;
     inspectPoint(plot, curves[selected]?.points[pointIndex], mode);
   }
   function readPoint() {
@@ -147,6 +155,7 @@ export function initWorkspace(root) {
   }
   function showSelected(resetPoint = true) {
     const curve = curves[selected];
+    if (!curve) windows.close("ode-solution-window");
     $("[data-inspector]").hidden = !curve;
     if (!curve) return;
     const options = curves.map((item, i) => {
@@ -166,7 +175,8 @@ export function initWorkspace(root) {
     $("[data-solution-status]").textContent =
       `${curve.points.length} samples. ${curve.messages.join(" ")}`;
     $("[data-time-plot]").hidden = mode !== "phase";
-    if (mode === "phase") drawTimePlot($("[data-time-plot]"), curve);
+    if (mode === "phase" && $("[data-inspector]").open)
+      drawTimePlot($("[data-time-plot]"), curve);
     readPoint();
   }
   function apply(clear = false) {
@@ -200,6 +210,15 @@ export function initWorkspace(root) {
     cursor = null;
     originalBounds = [...config.bounds];
     dirty = false;
+    windows.closeAll();
+    root.querySelectorAll("[data-window-message]").forEach((node) => {
+      node.textContent = "";
+    });
+    $("[data-parameter-summary]").textContent = ["a", "b", "c"]
+      .map((key) => `${key} = ${number(config[key])}`)
+      .join(" · ");
+    $("[data-method-summary]").textContent =
+      `${config.method === "rk4" ? "Adaptive RK4" : "Euler"} · max. step ${number(config.step)} · time span ${number(config.duration)}`;
     $("[data-dirty]").textContent =
       "Updating the field recalculates existing solutions.";
     $("[data-equilibria]").hidden = true;
@@ -342,6 +361,7 @@ export function initWorkspace(root) {
               );
             for (const branch of saddleSeeds(root, config.bounds))
               add(branch.seed, branch.direction, true);
+            windows.close("ode-equilibria-window");
             message(
               "Added four local saddle branches. These approximate the stable and unstable separatrices.",
             );
@@ -375,13 +395,23 @@ export function initWorkspace(root) {
     "submit",
     guard(() => apply()),
   );
-  form.addEventListener("input", (event) => {
-    if (event.target === input("preset")) return;
+  // Dialog controls belong to ode-config through their native form attribute.
+  // Their input events bubble through the workspace, not through the form.
+  root.addEventListener("input", (event) => {
+    if (event.target.form !== form || event.target === input("preset")) return;
     dirty = true;
     input("preset").value = "custom";
     $("[data-dirty]").textContent =
       "Edits pending. Update the field to apply them.";
   });
+  root.addEventListener("toolwindowopen", (event) => {
+    const active = windows.active();
+    active?.querySelector("[data-window-message]")?.replaceChildren();
+    if (event.detail.id === "ode-solution-window") showSelected(false);
+  });
+  root.addEventListener("toolwindowerror", (event) =>
+    message(event.detail.message, true),
+  );
   input("preset").addEventListener(
     "change",
     guard(() => {
@@ -467,8 +497,9 @@ export function initWorkspace(root) {
       $("[data-equilibria-note]").textContent = result.note;
       showRoots();
       redraw();
+      windows.open("ode-equilibria-window");
       message(
-        `${roots.length} equilibrium candidate${roots.length === 1 ? "" : "s"} found. See the equilibrium results below.`,
+        `${roots.length} equilibrium candidate${roots.length === 1 ? "" : "s"} found. Results are in the Equilibria window.`,
       );
     }),
   );
@@ -566,7 +597,7 @@ export function initWorkspace(root) {
   switchMode("direction");
   root
     .querySelectorAll(
-      "[data-enable], [data-mode], [data-zoom], [data-reset-view], [data-field-toggle], [data-nullclines], [data-export-svg], [data-find]",
+      "[data-enable], [data-mode], [data-open-window], [data-zoom], [data-reset-view], [data-field-toggle], [data-nullclines], [data-export-svg], [data-find]",
     )
     .forEach((node) => {
       node.disabled = false;
@@ -576,6 +607,7 @@ export function initWorkspace(root) {
   let resizeFrame = 0,
     lastWidth = stage.clientWidth;
   const resize = () => {
+    if (windows.active()?.id === "ode-solution-window") showSelected(false);
     if (lastWidth === stage.clientWidth) return;
     lastWidth = stage.clientWidth;
     cancelAnimationFrame(resizeFrame);

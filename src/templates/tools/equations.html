@@ -1,0 +1,95 @@
+<aside class="ode-sidebar" aria-label="Equations and initial values">
+  <form
+    id="ode-config"
+    class="ode-panel"
+    novalidate
+    aria-labelledby="ode-equations-heading"
+  >
+    <div class="ode-panel-heading">
+      <h2 id="ode-equations-heading">Equations</h2>
+    </div>
+    <fieldset
+      class="ode-panel-body"
+      disabled
+      data-enable
+      aria-labelledby="ode-equations-heading"
+    >
+      <label for="ode-preset">Example</label>
+      <select id="ode-preset" name="preset">
+        <option>Logistic growth</option>
+      </select>
+      <label for="ode-first" data-first-label>dy/dt =</label>
+      <input
+        id="ode-first"
+        name="first"
+        type="text"
+        value="a*y*(1-y/b)"
+        maxlength="256"
+        autocomplete="off"
+        autocapitalize="none"
+        spellcheck="false"
+        aria-describedby="ode-syntax"
+      />
+      <div data-phase-only hidden>
+        <label for="ode-second">dy/dt =</label>
+        <input
+          id="ode-second"
+          name="second"
+          type="text"
+          value="-a*x-b*y"
+          maxlength="256"
+          autocomplete="off"
+          autocapitalize="none"
+          spellcheck="false"
+          aria-describedby="ode-syntax"
+        />
+      </div>
+      <p id="ode-syntax" class="ode-hint">
+        Use t, y and parameters a, b, c. Write multiplication as 2*y.
+        <a href="#equation-notes">Syntax</a>
+      </p>
+      <p class="ode-applied-parameters" data-parameter-summary>
+        a = 1 · b = 2 · c = 1
+      </p>
+      <button class="pixel-button ode-apply" type="submit">
+        Update field <span aria-hidden="true">↵</span>
+      </button>
+      <p class="ode-hint" data-dirty>
+        Updating the field recalculates existing solutions.
+      </p>
+      <a class="ode-jump-link" href="#ode-plot-panel">View plot ↓</a>
+    </fieldset>
+  </form>
+  <form
+    id="ode-seed"
+    class="ode-panel"
+    novalidate
+    aria-labelledby="ode-seed-heading"
+  >
+    <div class="ode-panel-heading">
+      <h2 id="ode-seed-heading">Initial value</h2>
+    </div>
+    <fieldset
+      class="ode-panel-body"
+      disabled
+      data-enable
+      aria-labelledby="ode-seed-heading"
+    >
+      <div class="ode-pairs">
+        <label
+          ><span data-seed-label>t₀</span
+          ><input name="seedX" type="number" step="any" value="0"
+        /></label>
+        <label
+          >y₀<input name="seedY" type="number" step="any" value="0.5"
+        /></label>
+      </div>
+      <button class="pixel-button secondary ode-apply" type="submit">
+        Add solution <span aria-hidden="true">+</span>
+      </button>
+      <p class="ode-hint">
+        Or click the plot. Phase-plane initial values use t = 0.
+      </p>
+    </fieldset>
+  </form>
+</aside>

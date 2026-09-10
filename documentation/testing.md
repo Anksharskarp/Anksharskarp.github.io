@@ -43,7 +43,8 @@ describes the numerical test contract.
 Browser tests cover:
 
 - All four pages at seven widths from 320 to 1440 pixels.
-- Mobile and legacy anchor navigation, terminal history, and invalid commands.
+- Homepage source order, section numbering, shared navigation order, mobile and
+  legacy anchors, terminal history, and invalid commands.
 - Model rotation, reset, selection, keyboard input, context-loss fallback, and
   failure to load the optional module.
 - Loading-screen skip/replay, once-per-tab behavior, and reduced motion.
@@ -56,10 +57,18 @@ Browser tests cover:
 The separate `tests/browser/tools.spec.mjs` suite exercises Tools navigation,
 equation updates, click and keyboard seeds, Tab focus exit, curve removal, phase
 analysis, invalid-input recovery, stopped integrations, exported file contents,
-responsive settings, automated accessibility, and no-JavaScript/module-failure
-states. It also checks zoom/reset, every preset, and mobile touch scrolling without
-adding accidental solutions. Tools must load its own numerical modules without requesting the homepage
+responsive windows, automated accessibility, and no-JavaScript/module-failure
+states. Window tests cover native form ownership, retained drafts, validation inside
+the active window, Escape and backdrop closing, focus return, and removing the final
+solution. Each of the five windows receives desktop/mobile layout and accessibility
+checks, with a separate 320×568 test for scrolling and reachable actions. It also
+checks zoom/reset, every preset, and mobile touch scrolling without adding accidental
+solutions. Tools must load its own numerical modules without requesting the homepage
 terminal or Three.js. Check actual run results in [the review](review.md).
+
+Run browser suites sequentially. Separate Playwright processes can reuse port 4175
+and remove each other's artifacts or stop the shared server. Use one full suite run
+for normal verification; rerun only affected tests when checking a follow-up fix.
 
 The 3D browser tests enable Chromium's software renderer so they can verify actual
 rendering without a physical GPU. This flag is test-only. Real-device GPU behavior,

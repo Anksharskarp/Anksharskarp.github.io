@@ -1,5 +1,57 @@
 # Stability review
 
+## September 9, 2026: Section order and Tools windows
+
+About now follows the hero and precedes Selected work in the source HTML. Section
+numbers, shared navigation on all four pages, and terminal help follow that order.
+Existing section IDs and links remain valid.
+
+The Tools workspace uses wider page rails, a sidebar for equations and initial
+values, and a larger main plot. Parameters, plot bounds, integration settings,
+solution samples, and equilibrium results have separate native dialog windows.
+The existing neutral palette, type, borders, and square controls are retained.
+On narrower screens the primary panels move above the plot; dialogs fit the
+viewport and scroll internally with their titles and actions still reachable.
+
+### Refactor and behavior
+
+- Split the Tools template into equations, plot, windows, and notes partials.
+  The shared page renderer accepts a scoped layout class for future workspaces.
+- Added a reusable window controller for opening, closing, Escape, backdrop
+  clicks, and focus return. Numerical calculations remain in their existing modules.
+- Settings in separate windows belong to the same native configuration form.
+  Closing preserves pending edits; applying validates and recalculates through
+  the existing path. Errors remain readable inside the active window.
+- Solution time plots render after the window opens, when its width is measurable.
+  Removing the last solution closes its window and returns focus to an available
+  control. Applied parameters and integration settings remain summarized beside
+  the main controls and plot.
+- Updated the architecture, component, content, and Tools guides with extension
+  instructions. The existing [writing conventions](writing-conventions.md) continue
+  to require clear, direct labels and descriptions without marketing language.
+
+### Verification results
+
+- **22 unit tests passed:** 9 site checks and 13 numerical checks.
+- **27 browser tests passed** in Google Chrome: 13 site checks and 14 Tools checks.
+  These include section order, navigation, window drafts, validation, focus,
+  calculations, exports, presets, keyboard input, and touch scrolling.
+- All four pages and both Tools modes passed responsive checks from 320 to 1440
+  pixels. All five windows were checked at phone and desktop widths, with a separate
+  320×568 case for integration controls and scrolling.
+- **20 automated accessibility scans reported no violations** for the configured
+  WCAG 2 A/AA and WCAG 2.1 AA rules: four pages at two widths, plus the Tools
+  workspace and its five windows at two widths.
+- A fresh build generated **4 pages and validated 94 link and asset references**.
+  `npm run check:generated` confirmed that public HTML and CSS match their sources.
+- Desktop, tablet, and phone screenshots were inspected. A long method label was
+  shortened to “Adaptive RK4” to fit the smallest phone layout. The existing résumé,
+  blog, terminal, loading screen, and logic-board checks passed.
+
+Generated repository-root files are updated for the existing GitHub Pages setup.
+These local changes have not been committed, pushed, or deployed. Browser and
+numerical limits described below remain applicable.
+
 ## September 8, 2026: Tools page
 
 The differential-equations workspace is generated at `tools/index.html`. It uses

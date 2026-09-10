@@ -1,8 +1,8 @@
 import { resolveAlias } from "./navigation.js";
 export const destinations = Object.freeze({
+  about: "#about",
   work: "#work",
   experience: "#experience",
-  about: "#about",
   blog: "blog/",
   tools: "tools/",
   writing: "#writing",
@@ -34,7 +34,7 @@ export function initTerminal() {
     const command = raw.toLowerCase().replace(/^\//, "");
     if (command === "help") {
       feedback.textContent =
-        "Commands: /work, /experience, /about, /blog, /tools, /writing, /contact, /resume, /clear. ↑ and ↓ browse command history.";
+        "Commands: /about, /work, /experience, /blog, /tools, /writing, /contact, /resume, /clear. ↑ and ↓ browse command history.";
       return;
     }
     if (command === "clear") {

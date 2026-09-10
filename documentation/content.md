@@ -4,6 +4,20 @@ Read [writing conventions](writing-conventions.md) before drafting text. Run
 `npm run dev` while editing: it regenerates pages when content, templates, or CSS
 modules change. Refresh the browser to see the result.
 
+## Homepage sections
+
+`src/templates/home.html` places About immediately after the hero and before
+Selected work. The numbered sections are About (01), Selected work (02), Experience
+(03), Blog (04), and Contact (05). About text, education, coursework, and skills
+remain in `src/templates/partials/about.html`.
+
+Change section placement in the template's document order, not with CSS ordering.
+Keep the shared header (`src/templates/partials/header.html`), terminal hints
+(`src/templates/partials/terminal.html`), and terminal help
+(`assets/js/components/terminal.js`) in the same order. Preserve existing IDs such
+as `about` and `work` so direct links, legacy aliases, and terminal commands keep
+their destinations.
+
 ## Work experience
 
 Add an object to `content/experience.json`. Its position controls display order.
@@ -78,7 +92,13 @@ the featured project, a photograph, or a diagram never requires editing every pa
 
 ## Tools and examples
 
-The differential-equations utility is generated from `src/templates/tools.html`.
+The differential-equations utility is composed by `src/templates/tools.html` from
+`src/templates/tools/equations.html`, `plot.html`, `windows.html`, and `notes.html`.
+Edit each part at its source: equations and initial values in the sidebar, plot
+controls beside the plot, settings and results in their named windows, and
+explanations in the notes. Keep secondary fields and the sample slider in these
+windows so they do not turn into a long form beneath the plot.
+
 Example names, equations, parameters, bounds, and initial values live in
 `assets/js/tools/presets.js`, separate from work and blog content. See
 [Tools](tools.md#adding-examples-tools-or-pages) for the preset format and adding a

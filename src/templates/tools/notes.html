@@ -1,0 +1,92 @@
+<section class="ode-notes" id="equation-notes" aria-labelledby="notes-heading">
+  <div class="section-heading">
+    <h2 id="notes-heading">Equation and method notes</h2>
+    <span class="eyebrow">02 / Reference</span>
+  </div>
+  <div class="ode-notes-grid">
+    <details open>
+      <summary>Writing an equation</summary>
+      <p>
+        Enter only the right-hand side. Use <code>t, y</code> for a direction
+        field and <code>x, y</code> for an autonomous phase plane. Parameters
+        <code>a, b, c</code> are numbers you can adjust.
+      </p>
+      <p>
+        Operators: <code>+ - * / ^</code> and parentheses. Powers are
+        right-associative: <code>2^3^2 = 512</code>. Write <code>2*y</code>, not
+        <code>2y</code>.
+      </p>
+      <p>
+        Functions:
+        <code
+          >sin, cos, tan, asin, acos, atan, sinh, cosh, tanh, exp, log, ln,
+          sqrt, abs</code
+        >. Use parentheses, as in <code>sin(t)</code>. Angles are in radians;
+        log and ln are natural logarithms. Constants: <code>pi, e</code>.
+      </p>
+    </details>
+    <details>
+      <summary>Reading the plots</summary>
+      <p>
+        Direction-field segments show dy/dt. Phase-plane arrows show the
+        direction of (dx/dt, dy/dt); their lengths are normalized and do not
+        represent speed.
+      </p>
+      <p>
+        Click or tap to add a curve through that point. You can also enter
+        coordinates, or focus the plot and use arrow keys followed by Enter. The
+        selected curve is darker. Its time plot and value slider show the
+        numerical samples.
+      </p>
+      <p>
+        Nullclines mark where either derivative is zero. Equilibria satisfy both
+        equations. The search uses starting points across the visible window; it
+        may miss roots. A nonhyperbolic linearization does not determine
+        nonlinear stability.
+      </p>
+      <p>
+        For a second-order autonomous equation, set x to position and y to
+        velocity: x′ = y, y′ = f(x,y). The oscillator and pendulum examples use
+        this form.
+      </p>
+    </details>
+    <details>
+      <summary>Numerical methods and limits</summary>
+      <p>
+        Adaptive RK4 compares one full step with two half steps to estimate
+        local error. Tolerance controls this estimate, not the total error.
+        Euler uses a fixed step and can become unstable even when a true
+        solution is stable.
+      </p>
+      <p>
+        Reduce the step size and compare results. These explicit methods are
+        intended for smooth, non-stiff ordinary differential equations.
+        Singularities, discontinuities, and stiff systems need additional care.
+        Curves stop at a numerical or work limit and report the reason.
+      </p>
+      <p>
+        Up to 16 curves can be displayed. Values are computed in your browser.
+        The CSV contains the selected curve's numerical samples; the SVG
+        contains the current plot.
+      </p>
+    </details>
+    <details>
+      <summary>References</summary>
+      <p>
+        The interaction follows John Polking's
+        <a href="https://math.rice.edu/~polking/">dfield and pplane</a>: fields,
+        initial-value curves, and phase-plane analysis. This page uses its own
+        implementation.
+      </p>
+      <p>
+        See <a href="https://dlmf.nist.gov/3.7#v">NIST DLMF §3.7(v)</a> for the
+        fourth-order Runge–Kutta rule and
+        <a
+          href="https://github.com/MathWorks-Teaching-Resources/Phase-Plane-and-Slope-Field"
+          >MathWorks' Phase Plane and Slope Field tools</a
+        >
+        for related numerical analysis.
+      </p>
+    </details>
+  </div>
+</section>

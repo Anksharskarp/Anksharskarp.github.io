@@ -1,0 +1,252 @@
+<dialog
+  class="ode-window"
+  id="ode-parameters-window"
+  aria-labelledby="parameters-heading"
+>
+  <div class="ode-window-heading">
+    <h2 id="parameters-heading">Parameters</h2>
+    <button type="button" data-close-window aria-label="Close parameters">
+      Close <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="ode-window-body">
+    <p class="ode-window-intro">Use a, b, and c in your equations.</p>
+    <fieldset disabled data-enable aria-labelledby="parameters-heading">
+      <div class="ode-parameters">
+        <label
+          >a<input
+            name="a"
+            form="ode-config"
+            type="number"
+            step="any"
+            value="1"
+        /></label>
+        <label
+          >b<input
+            name="b"
+            form="ode-config"
+            type="number"
+            step="any"
+            value="2"
+        /></label>
+        <label
+          >c<input
+            name="c"
+            form="ode-config"
+            type="number"
+            step="any"
+            value="1"
+        /></label>
+      </div>
+    </fieldset>
+    <p class="ode-window-message" data-window-message role="alert"></p>
+  </div>
+  <div class="ode-window-footer">
+    <span class="ode-hint">Changes apply when you update the field.</span
+    ><button type="submit" form="ode-config" class="pixel-button">
+      Apply changes
+    </button>
+  </div>
+</dialog>
+
+<dialog
+  class="ode-window"
+  id="ode-bounds-window"
+  aria-labelledby="bounds-heading"
+>
+  <div class="ode-window-heading">
+    <h2 id="bounds-heading">Plot window</h2>
+    <button type="button" data-close-window aria-label="Close plot window">
+      Close <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="ode-window-body">
+    <fieldset disabled data-enable aria-labelledby="bounds-heading">
+      <div class="ode-pairs">
+        <label
+          ><span data-horizontal-min>t min</span
+          ><input
+            name="xmin"
+            form="ode-config"
+            type="number"
+            step="any"
+            value="-4"
+        /></label>
+        <label
+          ><span data-horizontal-max>t max</span
+          ><input
+            name="xmax"
+            form="ode-config"
+            type="number"
+            step="any"
+            value="6"
+        /></label>
+        <label
+          >y min<input
+            name="ymin"
+            form="ode-config"
+            type="number"
+            step="any"
+            value="-1"
+        /></label>
+        <label
+          >y max<input
+            name="ymax"
+            form="ode-config"
+            type="number"
+            step="any"
+            value="3"
+        /></label>
+      </div>
+      <label for="ode-density">Field density</label>
+      <select id="ode-density" name="density" form="ode-config">
+        <option value="13">Low</option>
+        <option value="19" selected>Medium</option>
+        <option value="27">High</option>
+      </select>
+    </fieldset>
+    <p class="ode-window-message" data-window-message role="alert"></p>
+  </div>
+  <div class="ode-window-footer">
+    <span class="ode-hint">Set the visible range of each axis.</span
+    ><button type="submit" form="ode-config" class="pixel-button">
+      Apply changes
+    </button>
+  </div>
+</dialog>
+
+<dialog
+  class="ode-window"
+  id="ode-integration-window"
+  aria-labelledby="integration-heading"
+>
+  <div class="ode-window-heading">
+    <h2 id="integration-heading">Integration</h2>
+    <button type="button" data-close-window aria-label="Close integration">
+      Close <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="ode-window-body">
+    <fieldset disabled data-enable aria-labelledby="integration-heading">
+      <label for="ode-method">Method</label>
+      <select id="ode-method" name="method" form="ode-config">
+        <option value="rk4">Adaptive RK4</option>
+        <option value="euler">Euler (fixed step)</option>
+      </select>
+      <div class="ode-pairs">
+        <label
+          >Time span<input
+            name="duration"
+            form="ode-config"
+            type="number"
+            step="any"
+            value="12"
+            min="0.001"
+            max="1000"
+        /></label>
+        <label
+          >Max. step<input
+            name="step"
+            form="ode-config"
+            type="number"
+            step="any"
+            value="0.1"
+            min="0.000001"
+            max="1"
+        /></label>
+        <label class="ode-setting-wide"
+          >RK4 tolerance<select
+            id="ode-tolerance"
+            name="tolerance"
+            form="ode-config"
+          >
+            <option value="0.0001">10⁻⁴</option>
+            <option value="0.000001" selected>10⁻⁶</option>
+            <option value="0.00000001">10⁻⁸</option>
+          </select></label
+        >
+        <label class="ode-setting-wide"
+          >Integrate<select
+            id="ode-direction"
+            name="direction"
+            form="ode-config"
+          >
+            <option value="both">Forward and backward</option>
+            <option value="forward">Forward</option>
+            <option value="backward">Backward</option>
+          </select></label
+        >
+      </div>
+      <p class="ode-hint">
+        Time span applies in each selected direction. For Euler, max. step is
+        the fixed step size.
+      </p>
+    </fieldset>
+    <p class="ode-window-message" data-window-message role="alert"></p>
+  </div>
+  <div class="ode-window-footer">
+    <span class="ode-hint">Existing solutions will be recalculated.</span
+    ><button type="submit" form="ode-config" class="pixel-button">
+      Apply changes
+    </button>
+  </div>
+</dialog>
+
+<dialog
+  class="ode-window ode-window-wide"
+  id="ode-solution-window"
+  data-inspector
+  hidden
+  aria-labelledby="solution-heading"
+>
+  <div class="ode-window-heading">
+    <h2 id="solution-heading">Solution values</h2>
+    <button type="button" data-close-window aria-label="Close solution values">
+      Close <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="ode-window-body">
+    <label for="ode-selected">Selected solution</label>
+    <select id="ode-selected" data-selected></select>
+    <div data-time-plot class="ode-time-plot" data-phase-only hidden></div>
+    <div class="ode-sample-panel">
+      <label for="ode-point">Point along solution</label>
+      <input id="ode-point" type="range" min="0" max="1" value="0" data-point />
+      <output class="ode-value-readout" for="ode-point" data-values></output>
+    </div>
+    <p class="ode-hint" data-solution-status></p>
+    <p class="ode-window-message" data-window-message role="alert"></p>
+  </div>
+  <div class="ode-window-footer ode-window-footer-actions">
+    <button type="button" class="ode-small-button" data-remove>
+      Remove selected</button
+    ><button type="button" class="pixel-button secondary" data-export-csv>
+      Download values (CSV)
+    </button>
+  </div>
+</dialog>
+
+<dialog
+  class="ode-window ode-window-wide"
+  id="ode-equilibria-window"
+  data-equilibria
+  hidden
+  aria-labelledby="equilibria-heading"
+>
+  <div class="ode-window-heading">
+    <h2 id="equilibria-heading">Equilibria</h2>
+    <button type="button" data-close-window aria-label="Close equilibria">
+      Close <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div
+    class="ode-window-body"
+    tabindex="0"
+    role="region"
+    aria-label="Equilibrium results"
+  >
+    <p class="ode-hint" data-equilibria-note></p>
+    <div data-roots></div>
+    <p class="ode-window-message" data-window-message role="alert"></p>
+  </div>
+</dialog>

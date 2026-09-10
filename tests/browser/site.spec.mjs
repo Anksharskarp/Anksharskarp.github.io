@@ -17,6 +17,13 @@ test("all pages remain readable at phone, tablet, and desktop widths", async ({
     for (const path of paths) {
       await page.goto(path);
       await expect(page.locator("h1")).toBeVisible();
+      await expect(page.locator(".main-nav a")).toHaveText([
+        "About",
+        "Work",
+        "Experience",
+        "Blog",
+        "Tools",
+      ]);
       expect(
         await page.evaluate(
           () => document.documentElement.scrollWidth <= innerWidth,
@@ -26,17 +33,27 @@ test("all pages remain readable at phone, tablet, and desktop widths", async ({
   }
   expect(errors).toEqual([]);
 });
-test("mobile anchors and legacy anchors are visible below the header", async ({
+test("homepage section order and mobile anchors agree with navigation", async ({
   page,
 }) => {
   await skipBoot(page);
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
-  await page.getByRole("link", { name: "Experience", exact: true }).click();
-  await page.waitForTimeout(600);
-  const section = await page.locator("#experience").boundingBox(),
-    header = await page.locator(".site-header").boundingBox();
-  expect(section.y).toBeGreaterThanOrEqual(header.height);
+  expect(
+    await page.locator("#main > section").evaluateAll((sections) =>
+      sections.map((section) => section.id || "hero"),
+    ),
+  ).toEqual(["hero", "about", "work", "experience", "writing", "contact"]);
+  await expect(
+    page.locator("#main > section > .section-heading > .eyebrow"),
+  ).toHaveText(["01 / About", "02 / Projects", "03 / Experience", "04 / Blog"]);
+  for (const name of ["About", "Work", "Experience"]) {
+    await page.getByRole("link", { name, exact: true }).click();
+    await page.waitForTimeout(600);
+    const section = await page.locator(`#${name.toLowerCase()}`).boundingBox(),
+      header = await page.locator(".site-header").boundingBox();
+    expect(section.y).toBeGreaterThanOrEqual(header.height);
+  }
   await page.goto("/#education");
   await expect(page).toHaveURL(/#about$/);
 });
@@ -47,8 +64,12 @@ test("terminal navigation, history, and invalid input remain safe", async ({
   await page.goto("/");
   await page.locator("#terminal summary").click();
   const input = page.locator("#command-input");
+  await input.fill("/help");
+  await page.locator("#command-form button").click();
+  await expect(page.locator("#command-feedback")).toContainText(
+    "Commands: /about, /work, /experience, /blog, /tools",
+  );
   for (const command of [
-    "/help",
     "/constructor",
     "/__proto__",
     "<img src=x onerror=alert(1)>",

@@ -11,6 +11,28 @@ and square controls when extending this page. Keep labels literal: “Update fie
 “Find equilibria,” and “Download values.” The [writing conventions](writing-conventions.md)
 apply to examples, help text, and numerical errors as well as headings.
 
+## Workspace layout
+
+The page uses the shared site shell with a wider content area. Equations and initial
+values sit beside the main plot. A toolbar opens separate settings and result
+windows, keeping secondary fields and numerical samples out of the main layout.
+The flat colors, monospace type, borders, and square controls use the existing
+theme variables.
+
+| Window | Contents |
+| ------ | -------- |
+| Parameters | Numeric values for `a`, `b`, and `c` |
+| Plot window | Axis bounds and field density |
+| Integration | Method, time span, maximum step, tolerance, and time direction |
+| Solution values | Selected curve, sample slider, values, phase-mode time plot, removal, and CSV export |
+| Equilibria | Search results, Jacobians, eigenvalues, classifications, and saddle-branch actions |
+
+At widths below 900px the equations and initial-value panels move above the plot;
+below 560px those panels stack. **View plot** and **Equations** links help move
+between them. Toolbar buttons wrap, and dialogs fit within the viewport with a
+scrollable body and visible title and actions. Settings and results use the same
+windows on mobile and desktop.
+
 ## Modes and controls
 
 | Mode            | Equation                           | Initial value        | Main plot                        |
@@ -34,15 +56,20 @@ this form.
   **Selected solution** to select an existing one. Touch scrolling remains a
   browser action. On narrow screens, **View plot** and **Equations** links move
   between the form and output without a separate navigation pattern.
-- Set window bounds, field density, integration method, time span, step, tolerance,
-  and integration direction in the settings. Time span applies separately in each
-  selected direction. Zoom is centered on the window; **Reset view** restores the
+- Set axis bounds and field density in **Plot window**, and numerical options in
+  **Integration**. Edit `a`, `b`, and `c` in **Parameters**. **Apply changes** in a
+  settings window submits the same configuration as **Update field**. Closing a
+  window retains pending edits; it does not apply or discard them. Time span
+  applies separately in each selected direction. Zoom is centered on the window;
+  **Reset view** restores the
   bounds from the last applied configuration.
-- Inspect numerical samples with the value slider. Phase mode also shows `x(t)`
-  and `y(t)` in a time plot. Solid and dashed lines distinguish the coordinates.
+- Open **Solution values** to inspect numerical samples with the value slider.
+  Phase mode also shows `x(t)` and `y(t)` in a time plot. Solid and dashed lines
+  distinguish the coordinates.
 - In phase mode, enable nullclines or choose **Find equilibria**. Results include
   coordinates, a numerical Jacobian, eigenvalues, and the local linearization's
-  classification. Saddles offer four approximate stable/unstable branches.
+  classification in the **Equilibria** window. Saddles offer four approximate
+  stable/unstable branches.
 - **Save plot (SVG)** downloads the main plot with labels and overlays.
   **Download values (CSV)** saves every sample of the selected curve, with columns
   `t,y` or `t,x,y`. The time plot is not a separate SVG export. Samples correspond
@@ -58,11 +85,16 @@ explanation.
 
 | File                            | Responsibility                                                                |
 | ------------------------------- | ----------------------------------------------------------------------------- |
-| `src/templates/tools.html`      | Forms, plot containers, method notes, and no-JavaScript state                 |
+| `src/templates/tools.html`      | Toolbar and composition of workspace partials                               |
+| `src/templates/tools/equations.html` | Equation and initial-value forms, applied-setting summaries             |
+| `src/templates/tools/plot.html` | Main plot, view controls, status, and SVG export                             |
+| `src/templates/tools/windows.html` | Settings and result dialogs                                              |
+| `src/templates/tools/notes.html` | Static syntax, numerical limits, and references                             |
 | `scripts/lib/site.mjs`          | Adds `tools/index.html` to the generated page set                             |
 | `scripts/lib/components.mjs`    | Shared shell, Tools navigation state, and page module selection               |
 | `assets/css/modules/tools.css`  | Workspace layout, compact controls, and responsive rules                      |
 | `assets/js/tools/workspace.js`  | Validation, applied configuration, selected curves, interactions, and startup |
+| `assets/js/components/tool-windows.js` | Dialog lifecycle, focus return, and open/close event handling          |
 | `assets/js/tools/expression.js` | Restricted expression grammar and evaluator                                   |
 | `assets/js/tools/solver.js`     | Equation adapters, integration, trajectories, and CSV serialization           |
 | `assets/js/tools/analysis.js`   | Jacobian, equilibrium search/classification, saddle seeds, and nullclines     |
@@ -75,6 +107,46 @@ that state as arguments. Keep calculations in numerical modules, separate from
 event handlers. Tools imports its own entry point without loading the homepage
 terminal or Three.js model. The shared loading introduction is independent of the
 calculator. Startup failure leaves the static notes and navigation available.
+
+## Settings and result windows
+
+`initToolWindows(root)` registers `dialog.ode-window[id]` elements once at startup.
+It returns `open(id)`, `close(id)`, `closeAll()`, and `active()`. The window component
+does not own equations, settings, curves, or numerical results.
+
+To add a window:
+
+1. Add a native `<dialog class="ode-window" id="unique-window-id">` in
+   `src/templates/tools/windows.html`, with `aria-labelledby` referencing its
+   visible heading. Use `ode-window-wide` when a plot or results need more room.
+2. Add a button with `data-open-window="unique-window-id"` and
+   `aria-haspopup="dialog"`, plus a `data-close-window` button inside the dialog.
+   Opening a result window programmatically uses `windows.open(id)` after its
+   contents are ready. Enable controls only after workspace initialization.
+3. Put settings fields outside the sidebar form but associate each one with
+   `form="ode-config"` and a unique `name`. The dialog's Apply button uses
+   `type="submit" form="ode-config"`. Read them through `form.elements` so the
+   configuration has one validation and apply path.
+4. Keep settings input listeners on the workspace root and filter using
+   `event.target.form === form`. DOM events from dialog fields do not bubble
+   through the sidebar form. Result controls such as the sample slider remain
+   outside this form, so they do not mark settings as edited.
+5. Add a `[data-window-message]` element with `role="alert"` for errors. The
+   workspace's `message()` reports errors in the active dialog as well as the main
+   status. Validation leaves the last successful configuration and plot intact;
+   a successful apply closes windows and updates the applied-setting summaries.
+
+The component allows one modal at a time. Native dialog behavior contains keyboard
+focus; Escape, Close, or clicking the backdrop closes it and restores focus to the
+opener. If the opener is unavailable, `[data-window-fallback]` is the fallback
+control. Closing preserves draft field values. Mode changes and loading a preset
+replace those values through the existing workspace functions.
+
+`toolwindowopen` bubbles with `detail.id`. The workspace uses it to clear the
+window's previous message and render the selected solution's time plot after the
+dialog has a measurable width. `toolwindowerror` bubbles with `detail.message` if
+opening fails. Report that error in the workspace rather than leaving the page
+unusable. Keep these events and focus behavior reusable for future tools.
 
 ## Expression handling
 
@@ -154,9 +226,18 @@ point, and a CSS module. Keep reusable numerical helpers separate from form stat
 Register CSS in `scripts/lib/styles.mjs`. Use the shared `page()` renderer and
 register the generated route in `scripts/lib/site.mjs`. Pass its entry-point path
 through the renderer's `modulePath` option instead of loading every tool on every
-page. For example, this workspace uses `tools: true`, `prefix: "../"`, and
+page. Its optional `pageClass` adds a body class for scoped layout. For example,
+this workspace uses `tools: true`, `prefix: "../"`, `pageClass: "tools-page"`, and
 `modulePath: "assets/js/tools/workspace.js"`; another tool can supply its own module
-while retaining the shared Tools navigation state.
+and layout class while retaining the shared Tools navigation state. The wider
+`--width` override is scoped to `body.tools-page` in `tools.css`.
+
+Compose larger page sections as template partials. `scripts/lib/site.mjs` loads
+the four files in `src/templates/tools/` and passes their rendered HTML to the
+matching placeholders in `src/templates/tools.html`. Register a new partial in
+that composition before adding its placeholder. Unresolved placeholders are
+build errors. Reuse `initToolWindows()` when another workspace needs the same
+dialog behavior; keep that utility's own data and calculations in its entry point.
 
 The current `/tools/` route opens this workspace directly. If a tools index is
 introduced, preserve this entry point or provide an intentional link or redirect.
@@ -167,8 +248,9 @@ and navigation tests.
 
 ## Publishing and verification
 
-`src/templates/tools.html` is an authoring file. GitHub Pages serves generated
-`tools/index.html`, shared root pages, the CSS bundle, and JavaScript files from
+`src/templates/tools.html` and `src/templates/tools/` are authoring sources.
+GitHub Pages serves generated `tools/index.html`, shared root pages, the CSS bundle,
+and JavaScript files from
 the repository root. Pushing only templates or generator changes leaves the live
 site unchanged. Follow [development and testing](testing.md#github-pages) to
 generate, check, and commit public output.
@@ -179,8 +261,10 @@ Test the utility at three levels:
    Euler convergence; backward integration; singularities and work limits;
    Jacobians, classifications, nullclines, and every preset.
 2. Browser: mode changes, pending and invalid edits, seeds, curve selection,
-   keyboard and touch controls, sample inspection, exports, equilibria, and startup
-   failure. Inspect downloaded SVG/CSV contents as well as the download action.
+   keyboard and touch controls, window open/close and focus return, settings form
+   ownership, sample inspection, exports, equilibria, and startup failure. Check
+   errors remain readable inside active dialogs and that closing retains edits.
+   Inspect downloaded SVG/CSV contents as well as the download action.
 3. Whole site: generated output matches source, Tools links resolve from home and
    blog, existing sections remain usable, no horizontal overflow, accessible
    forms and focus order, and no unrelated model downloads.

@@ -15,7 +15,8 @@ JavaScript for its calculator; its method notes are static HTML.
 | `content/posts.json`         | Article metadata; articles are sorted newest first                |
 | `content/posts/<slug>.html`  | Article body, including references                                |
 | `src/templates/home.html`    | Homepage section layout                                           |
-| `src/templates/tools.html`   | Differential-equations forms, plots, and reference notes          |
+| `src/templates/tools.html`   | Differential-equations toolbar and workspace composition          |
+| `src/templates/tools/`       | Equations, plot, settings/results windows, and reference notes    |
 | `src/templates/partials/`    | Header, footer, hero, featured project, about, contact, terminal  |
 | `scripts/lib/components.mjs` | Reusable project, experience, post, and page renderers            |
 | `scripts/lib/site.mjs`       | Reads content and composes the page set                           |
@@ -49,15 +50,29 @@ homepage anchors and terminal commands still resolve to the current sections.
 Old article files are retained when an entry is removed from the index; deleting or
 redirecting an old URL must be an intentional content decision.
 
+The homepage order is hero, About (01), Selected work (02), Experience (03), Blog
+(04), Contact (05), then the optional terminal. `src/templates/home.html` controls
+document order; the About content stays in its own partial. Shared navigation and
+terminal help list About before Work. Reorder the source HTML when moving a
+section so reading, keyboard, and visual order agree. Keep section IDs stable and
+update numbering, navigation, terminal help, and order checks together.
+
 Three.js is pinned in `package-lock.json` and copied locally with its MIT license.
 There are no runtime CDN requests. The homepage loads the optional viewer on demand;
 blog and tools pages do not load Three.js. Navigation and the terminal initialize before the
 optional model module is requested.
 
 The shared renderer marks Blog or Tools as the current navigation destination and
-selects each page's browser module. Tools uses `assets/js/tools/workspace.js`
-independently of the homepage entry point. Its numerical modules have no DOM
-dependencies. See [Tools](tools.md) for their boundaries and adding another utility.
+selects each page's browser module through `modulePath`. Its optional `pageClass`
+sets a body class for page-specific layout. Tools uses `pageClass: "tools-page"`
+to widen the existing page rails and `modulePath: "assets/js/tools/workspace.js"`
+independently of the homepage entry point. Other pages retain their normal width.
+
+The Tools template composes four partials: equations, plot, windows, and notes.
+Its workspace module owns pending edits, applied configuration, and results;
+`components/tool-windows.js` owns native dialog opening, closing, and focus return.
+Numerical modules have no DOM dependencies. See [Tools](tools.md) for these
+boundaries, dialog form ownership, and adding another utility.
 
 Branch-root GitHub Pages serves committed generated files without running the Node
 generator. `npm run check:generated` detects missing or stale public output; run it

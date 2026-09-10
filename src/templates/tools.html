@@ -5,382 +5,84 @@
   <h1>
     Differential equations<span class="name-period" aria-hidden="true">_</span>
   </h1>
-  <p>
-    Plot direction fields and phase planes. Add solutions, adjust parameters,
-    and examine equilibria.
-  </p>
+  <p>Direction fields, phase planes, and numerical solutions.</p>
 </header>
 <section
   class="ode-tool"
   data-ode-tool
   aria-label="Differential equations workspace"
 >
-  <div class="ode-modes" role="group" aria-label="Equation type">
-    <button type="button" data-mode="direction" aria-pressed="true" disabled>
-      Direction field <span>dy/dt</span>
-    </button>
-    <button type="button" data-mode="phase" aria-pressed="false" disabled>
-      Phase plane <span>dx/dt, dy/dt</span>
-    </button>
+  <div class="ode-toolbar">
+    <div class="ode-modes" role="group" aria-label="Equation type">
+      <button
+        type="button"
+        data-mode="direction"
+        data-window-fallback
+        aria-pressed="true"
+        disabled
+      >
+        Direction field <span>dy/dt</span>
+      </button>
+      <button type="button" data-mode="phase" aria-pressed="false" disabled>
+        Phase plane <span>dx/dt, dy/dt</span>
+      </button>
+    </div>
+    <div class="ode-window-actions" role="group" aria-label="Settings windows">
+      <button
+        type="button"
+        data-open-window="ode-parameters-window"
+        aria-haspopup="dialog"
+        disabled
+      >
+        Parameters
+      </button>
+      <button
+        type="button"
+        data-open-window="ode-bounds-window"
+        aria-haspopup="dialog"
+        disabled
+      >
+        Plot window
+      </button>
+      <button
+        type="button"
+        data-open-window="ode-integration-window"
+        aria-haspopup="dialog"
+        disabled
+      >
+        Integration
+      </button>
+    </div>
+    <div
+      class="ode-window-actions ode-result-actions"
+      role="group"
+      aria-label="Results windows"
+    >
+      <button
+        type="button"
+        data-open-window="ode-solution-window"
+        aria-haspopup="dialog"
+        disabled
+      >
+        Solution values
+      </button>
+      <button
+        type="button"
+        data-find
+        data-phase-only
+        aria-haspopup="dialog"
+        hidden
+        disabled
+      >
+        Find equilibria
+      </button>
+    </div>
   </div>
   <p class="ode-startup" data-startup role="status">
     The calculator needs JavaScript. If it does not open, reload this page. The
     equation and method notes are available below.
   </p>
-  <div class="ode-layout">
-    <aside class="ode-sidebar" aria-label="Equations and initial values">
-      <form id="ode-config" novalidate>
-        <fieldset disabled data-enable>
-          <legend>Equation</legend>
-          <label for="ode-preset">Example</label>
-          <select id="ode-preset" name="preset">
-            <option>Logistic growth</option>
-          </select>
-          <label for="ode-first" data-first-label>dy/dt =</label>
-          <input
-            id="ode-first"
-            name="first"
-            type="text"
-            value="a*y*(1-y/b)"
-            maxlength="256"
-            autocomplete="off"
-            autocapitalize="none"
-            spellcheck="false"
-            aria-describedby="ode-syntax"
-          />
-          <div data-phase-only hidden>
-            <label for="ode-second">dy/dt =</label>
-            <input
-              id="ode-second"
-              name="second"
-              type="text"
-              value="-a*x-b*y"
-              maxlength="256"
-              autocomplete="off"
-              autocapitalize="none"
-              spellcheck="false"
-              aria-describedby="ode-syntax"
-            />
-          </div>
-          <p id="ode-syntax" class="ode-hint">
-            Use t, y and parameters a, b, c. Write multiplication as 2*y.
-            <a href="#equation-notes">Syntax</a>
-          </p>
-          <div class="ode-parameters">
-            <label
-              >a<input name="a" type="number" step="any" value="1"
-            /></label>
-            <label
-              >b<input name="b" type="number" step="any" value="2"
-            /></label>
-            <label
-              >c<input name="c" type="number" step="any" value="1"
-            /></label>
-          </div>
-          <details class="ode-settings">
-            <summary>Plot window</summary>
-            <div class="ode-pairs">
-              <label
-                ><span data-horizontal-min>t min</span
-                ><input name="xmin" type="number" step="any" value="-4"
-              /></label>
-              <label
-                ><span data-horizontal-max>t max</span
-                ><input name="xmax" type="number" step="any" value="6"
-              /></label>
-              <label
-                >y min<input name="ymin" type="number" step="any" value="-1"
-              /></label>
-              <label
-                >y max<input name="ymax" type="number" step="any" value="3"
-              /></label>
-            </div>
-            <label for="ode-density">Field density</label>
-            <select id="ode-density" name="density">
-              <option value="13">Low</option>
-              <option value="19" selected>Medium</option>
-              <option value="27">High</option>
-            </select>
-          </details>
-          <details class="ode-settings">
-            <summary>Integration</summary>
-            <label for="ode-method">Method</label>
-            <select id="ode-method" name="method">
-              <option value="rk4">Runge–Kutta 4 (adaptive)</option>
-              <option value="euler">Euler (fixed step)</option>
-            </select>
-            <div class="ode-pairs">
-              <label
-                >Time span<input
-                  name="duration"
-                  type="number"
-                  step="any"
-                  value="12"
-                  min="0.001"
-                  max="1000"
-              /></label>
-              <label
-                >Max. step<input
-                  name="step"
-                  type="number"
-                  step="any"
-                  value="0.1"
-                  min="0.000001"
-                  max="1"
-              /></label>
-            </div>
-            <label for="ode-tolerance">RK4 tolerance</label>
-            <select id="ode-tolerance" name="tolerance">
-              <option value="0.0001">10⁻⁴</option>
-              <option value="0.000001" selected>10⁻⁶</option>
-              <option value="0.00000001">10⁻⁸</option>
-            </select>
-            <label for="ode-direction">Integrate</label>
-            <select id="ode-direction" name="direction">
-              <option value="both">Forward and backward</option>
-              <option value="forward">Forward</option>
-              <option value="backward">Backward</option>
-            </select>
-            <p class="ode-hint">
-              Time span applies in each selected direction. For Euler, max. step
-              is the fixed step size.
-            </p>
-          </details>
-          <button class="pixel-button ode-apply" type="submit">
-            Update field <span aria-hidden="true">↵</span>
-          </button>
-          <a class="ode-jump-link" href="#ode-plot-panel">View plot ↓</a>
-          <p class="ode-hint" data-dirty>
-            Updating the field recalculates existing solutions.
-          </p>
-        </fieldset>
-      </form>
-      <form id="ode-seed" novalidate>
-        <fieldset disabled data-enable>
-          <legend>Initial value</legend>
-          <div class="ode-pairs">
-            <label
-              ><span data-seed-label>t₀</span
-              ><input name="seedX" type="number" step="any" value="0"
-            /></label>
-            <label
-              >y₀<input name="seedY" type="number" step="any" value="0.5"
-            /></label>
-          </div>
-          <button class="pixel-button secondary ode-apply" type="submit">
-            Add solution <span aria-hidden="true">+</span>
-          </button>
-          <p class="ode-hint">
-            Or click the plot. Phase-plane initial values use t = 0.
-          </p>
-        </fieldset>
-      </form>
-    </aside>
-    <div class="ode-output">
-      <div class="ode-plot-panel" id="ode-plot-panel">
-        <div class="terminal-bar">
-          <span class="window-dots" aria-hidden="true"
-            ><i></i><i></i><i></i></span
-          ><span data-plot-title>Direction field</span
-          ><span class="terminal-tag" data-count>0 solutions</span>
-        </div>
-        <div class="ode-plot-controls">
-          <div class="ode-toggles">
-            <label
-              ><input
-                type="checkbox"
-                data-field-toggle
-                checked
-                disabled
-              />Field</label
-            >
-            <label data-phase-only hidden
-              ><input
-                type="checkbox"
-                data-nullclines
-                disabled
-              />Nullclines</label
-            >
-          </div>
-          <div class="ode-view-buttons" role="group" aria-label="Plot view">
-            <button type="button" data-zoom="0.5" aria-label="Zoom in" disabled>
-              +
-            </button>
-            <button type="button" data-zoom="2" aria-label="Zoom out" disabled>
-              −
-            </button>
-            <button type="button" data-reset-view disabled>Reset view</button>
-          </div>
-          <a class="ode-jump-link" href="#ode-config">Equations ↑</a>
-        </div>
-        <div class="ode-plot" data-plot>
-          <p class="ode-plot-placeholder">
-            Direction field and solution curves appear here.
-          </p>
-        </div>
-        <div class="ode-plot-caption">
-          <span data-axis-note>Horizontal: t · Vertical: y</span
-          ><span data-cursor>Click to add a solution</span>
-        </div>
-        <p class="ode-nullcline-key" data-nullcline-key hidden>
-          <span>Solid: dx/dt = 0</span><span>Dashed: dy/dt = 0</span>
-        </p>
-      </div>
-      <p class="ode-message" id="ode-message" role="status" aria-live="polite">
-        Choose an equation, then add an initial value.
-      </p>
-      <div class="ode-action-row">
-        <button type="button" class="ode-small-button" data-clear disabled>
-          Clear solutions
-        </button>
-        <button type="button" class="ode-small-button" data-export-svg disabled>
-          Save plot (SVG)
-        </button>
-        <button
-          type="button"
-          class="ode-small-button"
-          data-find
-          data-phase-only
-          hidden
-          disabled
-        >
-          Find equilibria
-        </button>
-      </div>
-      <section
-        class="ode-inspector"
-        data-inspector
-        hidden
-        aria-labelledby="solution-heading"
-      >
-        <div class="ode-section-bar">
-          <h2 id="solution-heading">Solution values</h2>
-          <button type="button" class="ode-small-button" data-remove>
-            Remove selected
-          </button>
-        </div>
-        <label for="ode-selected">Selected solution</label>
-        <select id="ode-selected" data-selected></select>
-        <div data-time-plot class="ode-time-plot" data-phase-only hidden></div>
-        <label for="ode-point">Point along solution</label>
-        <input
-          id="ode-point"
-          type="range"
-          min="0"
-          max="1"
-          value="0"
-          data-point
-        />
-        <output class="ode-value-readout" for="ode-point" data-values></output>
-        <p class="ode-hint" data-solution-status></p>
-        <button type="button" class="ode-small-button" data-export-csv>
-          Download values (CSV)
-        </button>
-      </section>
-      <section
-        class="ode-equilibria"
-        data-equilibria
-        hidden
-        aria-labelledby="equilibria-heading"
-      >
-        <div class="ode-section-bar">
-          <h2 id="equilibria-heading">Equilibria</h2>
-        </div>
-        <p class="ode-hint" data-equilibria-note></p>
-        <div data-roots></div>
-      </section>
-    </div>
-  </div>
+  <div class="ode-layout">{{equations}} {{plot}}</div>
+  {{windows}}
 </section>
-<section class="ode-notes" id="equation-notes" aria-labelledby="notes-heading">
-  <div class="section-heading">
-    <h2 id="notes-heading">Equation and method notes</h2>
-    <span class="eyebrow">02 / Reference</span>
-  </div>
-  <div class="ode-notes-grid">
-    <details open>
-      <summary>Writing an equation</summary>
-      <p>
-        Enter only the right-hand side. Use <code>t, y</code> for a direction
-        field and <code>x, y</code> for an autonomous phase plane. Parameters
-        <code>a, b, c</code> are numbers you can adjust.
-      </p>
-      <p>
-        Operators: <code>+ - * / ^</code> and parentheses. Powers are
-        right-associative: <code>2^3^2 = 512</code>. Write <code>2*y</code>, not
-        <code>2y</code>.
-      </p>
-      <p>
-        Functions:
-        <code
-          >sin, cos, tan, asin, acos, atan, sinh, cosh, tanh, exp, log, ln,
-          sqrt, abs</code
-        >. Use parentheses, as in <code>sin(t)</code>. Angles are in radians;
-        log and ln are natural logarithms. Constants: <code>pi, e</code>.
-      </p>
-    </details>
-    <details>
-      <summary>Reading the plots</summary>
-      <p>
-        Direction-field segments show dy/dt. Phase-plane arrows show the
-        direction of (dx/dt, dy/dt); their lengths are normalized and do not
-        represent speed.
-      </p>
-      <p>
-        Click or tap to add a curve through that point. You can also enter
-        coordinates, or focus the plot and use arrow keys followed by Enter. The
-        selected curve is darker. Its time plot and value slider show the
-        numerical samples.
-      </p>
-      <p>
-        Nullclines mark where either derivative is zero. Equilibria satisfy both
-        equations. The search uses starting points across the visible window; it
-        may miss roots. A nonhyperbolic linearization does not determine
-        nonlinear stability.
-      </p>
-      <p>
-        For a second-order autonomous equation, set x to position and y to
-        velocity: x′ = y, y′ = f(x,y). The oscillator and pendulum examples use
-        this form.
-      </p>
-    </details>
-    <details>
-      <summary>Numerical methods and limits</summary>
-      <p>
-        Adaptive RK4 compares one full step with two half steps to estimate
-        local error. Tolerance controls this estimate, not the total error.
-        Euler uses a fixed step and can become unstable even when a true
-        solution is stable.
-      </p>
-      <p>
-        Reduce the step size and compare results. These explicit methods are
-        intended for smooth, non-stiff ordinary differential equations.
-        Singularities, discontinuities, and stiff systems need additional care.
-        Curves stop at a numerical or work limit and report the reason.
-      </p>
-      <p>
-        Up to 16 curves can be displayed. Values are computed in your browser.
-        The CSV contains the selected curve's numerical samples; the SVG
-        contains the current plot.
-      </p>
-    </details>
-    <details>
-      <summary>References</summary>
-      <p>
-        The interaction follows John Polking's
-        <a href="https://math.rice.edu/~polking/">dfield and pplane</a>: fields,
-        initial-value curves, and phase-plane analysis. This page uses its own
-        implementation.
-      </p>
-      <p>
-        See <a href="https://dlmf.nist.gov/3.7#v">NIST DLMF §3.7(v)</a> for the
-        fourth-order Runge–Kutta rule and
-        <a
-          href="https://github.com/MathWorks-Teaching-Resources/Phase-Plane-and-Slope-Field"
-          >MathWorks' Phase Plane and Slope Field tools</a
-        >
-        for related numerical analysis.
-      </p>
-    </details>
-  </div>
-</section>
+{{notes}}
