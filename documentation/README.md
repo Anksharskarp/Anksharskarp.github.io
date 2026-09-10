@@ -2,7 +2,9 @@
 
 Start here before changing content or adding a component.
 
+- [Theme and design system](design-system.md): approved colors, typography, spacing, controls, windows, responsive behavior, and visual review criteria.
 - [Writing conventions](writing-conventions.md): required tone for labels, descriptions, and articles.
+- [Adding pages](new-pages.md): renderer and template examples, style reuse, route registration, and verification.
 - [Architecture](architecture.md): source files, generated output, and shared page structure.
 - [Content updates](content.md): adding work experience, projects, and blog posts.
 - [Components](components.md): JavaScript, CSS, accessibility, and extension points.

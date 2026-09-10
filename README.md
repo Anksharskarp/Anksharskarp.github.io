@@ -7,6 +7,10 @@ Existing GitHub Pages URLs are preserved.
 **Writing should be clear, direct, and natural. Do not use marketing-style labels
 or slogans.** See [writing conventions](documentation/writing-conventions.md).
 
+For future pages, follow the [theme and design system](documentation/design-system.md)
+and [page-building guide](documentation/new-pages.md). They document the implemented
+palette, typography, spacing, controls, responsive rules, and shared page renderer.
+
 ## Develop
 
 ```sh

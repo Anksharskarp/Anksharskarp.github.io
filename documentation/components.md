@@ -1,5 +1,9 @@
 # Components
 
+Follow the [design system](design-system.md) for visual values and states, and
+[the new-page guide](new-pages.md) for a complete renderer/template example.
+This document covers component boundaries and behavior.
+
 ## Shared HTML
 
 The page renderer in `scripts/lib/components.mjs` provides the document head,
@@ -34,8 +38,8 @@ prefix. Tools uses `tools-page` to widen its rails without changing other pages.
 
 `assets/js/boot.js` remains a small, separate classic script in the head because it
 coordinates first-paint visibility. It owns its modal, timeout, skip, replay,
-reduced-motion, and session-storage behavior. The initial intro expires after
-1.65 seconds; a fail-safe also releases the page if setup stalls. A late document
+reduced-motion, and session-storage behavior. The intro normally closes 1.65 seconds
+after opening; separate fail-safes release the page if setup stalls. A late document
 load cannot reopen an intro whose initial fail-safe has already expired.
 
 The Tools page uses a separate `assets/js/tools/workspace.js` entry point, chosen by
