@@ -90,6 +90,15 @@ Shared contact links and résumé location come from `content/site.json`. Educat
 coursework, skills, and the introductory text live in their named partials. Changing
 the featured project, a photograph, or a diagram never requires editing every page.
 
+The current résumé download is `assets/documents/william-zhang-resume.pdf`.
+When replacing it, copy the supplied PDF without editing its text. If the public
+path changes, update `resumePath`, project links that point to the résumé, the
+`resume` destination in `assets/js/components/terminal.js`, and the PDF browser
+check. Preserve previously published dated files for direct-link compatibility.
+Review the featured project's metrics and article introductions as well as JSON
+entries so roles and figures stay consistent across the site. Record source
+changes or explicit exceptions in [content authority](writing-conventions.md#content-authority).
+
 ## Tools and examples
 
 The differential-equations utility is composed by `src/templates/tools.html` from

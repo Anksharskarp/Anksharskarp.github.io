@@ -7,7 +7,7 @@ export const destinations = Object.freeze({
   tools: "tools/",
   writing: "#writing",
   contact: "#contact",
-  resume: "assets/documents/william-zhang-resume-august-2026.pdf",
+  resume: "assets/documents/william-zhang-resume.pdf",
 });
 export function commandDestination(command) {
   const key = resolveAlias(command);

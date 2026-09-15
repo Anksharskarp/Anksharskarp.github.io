@@ -12,17 +12,16 @@
       ><a href="../../blog/" aria-current="page">Blog</a
       ><a href="../../tools/" >Tools</a>
     </nav>
-    <a class="resume-link" href="../../assets/documents/william-zhang-resume-august-2026.pdf"
+    <a class="resume-link" href="../../assets/documents/william-zhang-resume.pdf"
       >Résumé <span aria-hidden="true">↗</span></a
     >
   </div>
 </header>
 <main id="main" class="page-width"><header class="article-header"><a class="back-link" href="../">← All articles</a><p class="eyebrow">001 / The Peer Network · Summer 2026</p><h1>Managing video calls and session expiry in React Native</h1><p class="article-deck">How I worked with native video events, API session timers, and navigation in The Peer Network’s mobile app during summer 2026.</p><div class="article-meta"><span>William Zhang</span><time datetime="2026-09-07">September 7, 2026</time><span>10 min read</span></div></header><div class="article-layout"><aside class="article-toc"><nav aria-label="On this page"><h2>In this article</h2><ol><li><a href="#two-lifecycles">01 · Two lifecycles</a></li><li><a href="#native-boundary">02 · The native boundary</a></li><li><a href="#three-clocks">03 · Session timers</a></li><li><a href="#one-exit">04 · Call exits</a></li><li><a href="#late-responses">05 · Late responses</a></li><li><a href="#verification">06 · What to verify</a></li><li><a href="#references">References</a></li></ol></nav></aside><article class="article-body" aria-label="Article content"><p>
-  During my summer 2026 internship at The Peer Network, I worked on the React
-  Native app that lets people book sessions with peer counselors and meet over
-  video. The interface looks straightforward: choose a time, join, talk, leave.
-  Underneath, the application has to coordinate JavaScript, native media SDKs, a
-  REST backend, and two mobile operating systems.
+  In summer 2026, I worked on The Peer Network’s React Native app for booking
+  appointments and video sessions with licensed peer counselors. The app
+  coordinates JavaScript, native media SDKs, a REST backend, and the iOS and
+  Android operating systems.
 </p>
 <p>
   This article focuses on the call lifecycle in that app. An authentication

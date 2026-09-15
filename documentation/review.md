@@ -1,5 +1,28 @@
 # Stability review
 
+## September 15, 2026: Résumé content update
+
+Updated experience, project summaries, skills, introductory text, and the featured
+project using the supplied `William_Zhang_Resume.pdf`. Added Purdue single-photon
+detector research and Stesso video-search work. Updated The Peer Network's current
+role, dates, user count, and rebooking metric; revised Penn's role and dates; and
+specified Finmath's pricing models and PyPI distribution. Removed the duplicate
+Peer Network description from the Purdue Stack entry. Descriptions are rewritten
+as website prose. The Stesso title follows the earlier explicit research
+designation; see [content authority](writing-conventions.md#content-authority).
+
+The shared résumé links, Ecofriend card, and terminal command now use
+`assets/documents/william-zhang-resume.pdf`. Its SHA-256 matches the supplied PDF.
+The previously published August PDF remains available at its existing path.
+The article's introduction now describes summer work without calling the ongoing
+Peer Network role an internship; its technical account and URL are preserved.
+
+Verification: 22 unit tests and 27 Chrome browser tests passed. The build generated
+four pages and validated 94 links; generated-output and whitespace checks passed.
+Desktop, tablet, and phone screenshots were inspected for the revised content.
+The approved theme and application behavior are unchanged. These checks are local;
+they do not publish the update.
+
 ## September 9, 2026: Section order and Tools windows
 
 About now follows the hero and precedes Selected work in the source HTML. Section

@@ -48,8 +48,11 @@ test("the existing site renders with its public URLs and links intact", () => {
   for (const fact of [
     "Undergraduate AI Researcher",
     "83% test accuracy",
-    "over 1,000 users",
-    "Apr — Aug 2025",
+    "900+ users",
+    "Jun 2024 — Aug 2025",
+    "1,663 instructional clips from 250 videos",
+    "single-photon detection",
+    "Black–Scholes",
     "3.93 / 4.00",
     "May 2028",
   ])
@@ -160,6 +163,7 @@ test("legacy commands resolve, but inherited properties and HTML are ordinary un
   assert.equal(commandDestination("projects"), "#work");
   assert.equal(commandDestination("education"), "#about");
   assert.equal(commandDestination("tools"), "tools/");
+  assert.equal(commandDestination("resume"), json(root, "site").resumePath);
   assert.equal(resolveAlias("timeline"), "experience");
   for (const input of [
     "constructor",

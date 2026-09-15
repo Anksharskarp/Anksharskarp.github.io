@@ -234,7 +234,7 @@ test("the PDF remains available and blog pages never load Three.js", async ({
   await page.goto("/blog/keeping-a-call-alive/");
   expect(loaded.some((url) => url.includes("/vendor/three/"))).toBe(false);
   const pdf = await request.get(
-    "/assets/documents/william-zhang-resume-august-2026.pdf",
+    "/assets/documents/william-zhang-resume.pdf",
   );
   expect(pdf.ok()).toBe(true);
   expect(pdf.headers()["content-type"]).toContain("pdf");

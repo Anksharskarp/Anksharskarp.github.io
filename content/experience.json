@@ -1,49 +1,60 @@
 [
   {
-    "organization": "Stesso AI",
-    "role": "Undergraduate AI Researcher",
-    "dates": "May — Aug 2026",
+    "organization": "Purdue University · Computer Science",
+    "role": "Undergraduate Researcher",
+    "dates": "Aug 2026 — Present",
     "category": "Research",
     "paragraphsHtml": [
-      "Built an OpenCV and PyTorch pipeline to classify home-inspection photos by repair category, reaching <strong>83% test accuracy</strong> on Kaggle benchmark data.",
-      "Reduced token usage in a video-generation API workflow by <strong>16%</strong>, lowering monthly inference costs while preserving output quality."
+      "In Professor Sotiris Nousias’s group, developed a Python and NumPy simulation of single-photon detection with a browser interface. The model includes photon arrivals, detection efficiency, dark counts, dead time, timing jitter, and picosecond timestamp quantization.",
+      "Applied Fourier analysis to the simulated timestamps. Numerical tests check photon statistics and spectral peaks under sparse signals, aliasing, detector saturation, and pulse trains."
     ]
   },
   {
     "organization": "The Peer Network",
-    "role": "Mobile App Developer Intern",
-    "dates": "May — Aug 2026",
-    "category": "Internship",
+    "role": "Mobile App Developer",
+    "dates": "May 2026 — Present",
+    "category": "Mobile development",
     "paragraphsHtml": [
-      "Built the React Native iOS and Android app, scaling to <strong>over 1,000 users</strong>. Integrated Amazon Chime for counselor–patient video sessions, supporting the platform’s HIPAA and SOC 2 requirements.",
-      "Engineered a Cronofy booking platform with mutex synchronization to prevent double-booking."
+      "Worked on an eight-person engineering and design team to develop and release a React Native telehealth app on iOS and Android. The app served <strong>900+ users</strong>, with a <strong>34% increase in appointment rebooking</strong>.",
+      "Integrated Amazon Chime for video sessions between licensed peer counselors and patients, supporting the platform’s HIPAA and SOC 2 requirements. Implemented booking through Cronofy with mutex locks to prevent concurrent requests from booking the same slot."
     ],
     "link": {
       "href": "blog/keeping-a-call-alive/",
-      "label": "Read about the implementation"
+      "label": "Read article"
     }
   },
   {
     "organization": "Purdue Stack",
     "role": "Project Lead & Full-Stack Developer",
     "dates": "Sep 2025 — Present",
-    "category": "Engineering & leadership",
+    "category": "Software development",
     "paragraphsHtml": [
-      "Led an Electron desktop app for Professor Xiaotao Yang’s geology lab, reducing Jupyter-based seismic analysis runtime by <strong>34%</strong>. Contributed Fourier-series functionality to SeisGo, an open-source Python seismic analysis package.",
-      "Worked with eight engineers and designers to ship The Peer Network’s mobile app to the App Store and Google Play."
+      "Led work on an Electron interface for SeisGo, a Python seismic-analysis package. Analysis time was <strong>34% lower</strong> than with the lab’s Jupyter workflow.",
+      "Added Fourier-series analysis to SeisGo, which is distributed through PyPI."
+    ]
+  },
+  {
+    "organization": "Stesso AI",
+    "role": "Undergraduate AI Researcher",
+    "dates": "May — Aug 2026",
+    "category": "Research",
+    "paragraphsHtml": [
+      "Developed a search pipeline for <strong>1,663 instructional clips from 250 videos</strong>. Compared TF-IDF, matching over action, object, tool, and supply fields, and hybrid ranking through blinded relevance tests.",
+      "Used OpenCV and PyTorch to classify home-inspection photos by repair category. The classifier reached <strong>83% test accuracy</strong> on Kaggle data.",
+      "Changed a video-generation API workflow to use <strong>16% fewer tokens</strong> while retaining output quality and reducing inference costs."
     ]
   },
   {
     "organization": "University of Pennsylvania",
-    "role": "Undergraduate Researcher · Perelman School of Medicine",
-    "dates": "Apr — Aug 2025",
+    "role": "Research Intern · Perelman School of Medicine",
+    "dates": "Jun 2024 — Aug 2025",
     "category": "Research",
     "paragraphsHtml": [
-      "Worked in Professor Chamith Rajapakse’s lab on <strong>500,000+ emergency-room cases</strong> spanning 20 years of patient records. Built a PyTorch/Keras pipeline to predict bone-fracture risk from environmental and movement features."
+      "Analyzed <strong>500,000+ emergency-room cases</strong> across 20 years of records in Professor Chamith Rajapakse’s lab. Trained a PyTorch/Keras network to estimate bone-fracture risk from environmental and movement features."
     ],
     "details": {
-      "summary": "Device development & publication",
-      "bodyHtml": "Built an Arduino/C++ fitness tracker to quantify patient mobility and support physical-therapy outcome assessment. Co-authored an abstract and poster accepted to the 2025 New England Chapter of the American College of Sports Medicine conference."
+      "summary": "Mobility tracking & poster",
+      "bodyHtml": "Developed an Arduino/C++ device to measure mobility for physical-therapy assessment. Co-authored a poster accepted for presentation at the 2025 New England ACSM conference."
     }
   }
 ]
